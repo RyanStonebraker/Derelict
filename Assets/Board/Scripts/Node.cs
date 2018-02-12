@@ -54,13 +54,14 @@ public class Node : MonoBehaviour {
            && collision.gameObject.tag != "RowI" 
            && collision.gameObject.tag != "RowJ" 
            && collision.gameObject.tag != "Controller"
-           && collision.gameObject.GetComponent<GeneralObject>().collidingObject.tag == "Controller")
+           /*&& collision.gameObject.GetComponent<GeneralObject>().collidingObject.tag == "Controller"*/)
         {
             Debug.Log("Impact with " + collision.gameObject);
             try
             {
-                collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
+                //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                 setCollidingObject(collision);
+                collision.gameObject.transform.parent = gameObject.transform;
                 joinObject();
                 //snap();
             }
