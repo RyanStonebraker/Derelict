@@ -70,6 +70,9 @@ public class ShipController : MonoBehaviour {
 		GameObject BoardObject = null;
 		try {
 		BoardObject = GameObject.Find(teamBoard);
+		if (BoardObject.GetComponent<Board>()) {
+			Debug.Log("GOT BOARD");
+		}
 		}
 		catch {
 			Debug.Log("Board does not exist!");
@@ -78,7 +81,7 @@ public class ShipController : MonoBehaviour {
 		if (BoardObject != null) {
 			for (int i = 0; i < LifeSpots.Length; ++i) {
 				if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col)) {
-					// BoardObject.GetComponent<Board>().toggleMiss((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
+					BoardObject.GetComponent<Board>().toggleMiss((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
 					LifeSpots[i].Dead = true;
 					BoardObject.GetComponent<Board>().setHit((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
 				}
