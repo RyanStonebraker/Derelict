@@ -9,6 +9,8 @@ public class Node : MonoBehaviour {
     public GameObject collidingObject;
     public int jointBreakForce = 1000;
     public int jointTorqueBreakForce = 1000;
+    public bool hit = false;
+    public bool sunk = false;
 	
     public void joinObject()
     {
@@ -62,7 +64,7 @@ public class Node : MonoBehaviour {
                 //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                 setCollidingObject(collision);
 
-                if (gameObject.GetComponent<FixedJoint>().connectedBody == null)
+                if (gameObject.GetComponent<FixedJoint>() == null)
                 {
                     collision.gameObject.transform.parent = gameObject.transform;
                     joinObject();
@@ -98,7 +100,7 @@ public class Node : MonoBehaviour {
                 Debug.Log("Impact with " + collision.gameObject);
                 try
                 {
-                    if (gameObject.GetComponent<FixedJoint>().connectedBody == null)
+                    if (gameObject.GetComponent<FixedJoint>() == null)
                     {
                         //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                         setCollidingObject(collision);
@@ -134,6 +136,19 @@ public class Node : MonoBehaviour {
         {
             GetComponent <Renderer>().enabled = false;
             Instantiate(shipPart, transform.position, transform.rotation);
+        }
+
+        if(collidingObject != null)
+        {
+            float duration = 1.0F;
+            float lerp = Mathf.PingPong(Time.time, duration) / duration;
+            gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
+            state = true;
+        }
+        else
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.green;
+            state = false;
         }
 	}
 }

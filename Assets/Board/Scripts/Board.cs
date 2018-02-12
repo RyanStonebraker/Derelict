@@ -32,6 +32,16 @@ public class Board : MonoBehaviour {
         return get(row, index).GetComponent<Node>().state;
     }
 
+    public bool setHit(char row, int index)
+    {
+        return get(row, index).GetComponent<Node>().hit;
+    }
+
+    public bool setSunk(char row, int index)
+    {
+        return get(row, index).GetComponent<Node>().sunk;
+    }
+
     public void setNodeState(char row, int index, bool state)
     {
         get(row, index).GetComponent<Node>().state = state;
