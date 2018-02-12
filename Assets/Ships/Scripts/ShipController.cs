@@ -70,12 +70,9 @@ public class ShipController : MonoBehaviour {
 		GameObject BoardObject = null;
 		try {
 			BoardObject = GameObject.Find(teamBoard).gameObject;
-		if (BoardObject.GetComponent<Board>()) {
-			Debug.Log("GOT BOARD");
-		}
 		}
 		catch {
-			Debug.Log("Board does not exist!");
+			Debug.Log("----- Ship Error ----- Board does not exist!");
 		}
 
 		if (BoardObject != null) {
