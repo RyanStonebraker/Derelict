@@ -11,6 +11,7 @@ public class Node : MonoBehaviour {
     public int jointTorqueBreakForce = 1000;
     public bool hit = false;
     public bool sunk = false;
+    public bool miss = false;
 	
     public void joinObject()
     {
@@ -44,6 +45,9 @@ public class Node : MonoBehaviour {
     void OnTriggerEnter (Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
+
+        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
+        
         if (collision.gameObject.tag != "Board" 
            && collision.gameObject.tag != "RowA" 
            && collision.gameObject.tag != "RowB" 
@@ -82,7 +86,6 @@ public class Node : MonoBehaviour {
     {
         if (collision.gameObject.tag != "Board")
         {
-            Debug.Log("Impact with " + collision.gameObject.tag);
             if (collision.gameObject.tag != "Board"
                && collision.gameObject.tag != "RowA"
                && collision.gameObject.tag != "RowB"
@@ -97,7 +100,7 @@ public class Node : MonoBehaviour {
                && collision.gameObject.tag != "Controller"
                /*&& collision.gameObject.GetComponent<GeneralObject>().collidingObject.tag == "Controller"*/)
             {
-                Debug.Log("Impact with " + collision.gameObject);
+               
                 try
                 {
                     if (gameObject.GetComponent<FixedJoint>() == null)
@@ -106,6 +109,7 @@ public class Node : MonoBehaviour {
                         setCollidingObject(collision);
                         collision.gameObject.transform.parent = gameObject.transform;
                         joinObject();
+                        miss = true;
                         //snap();
                     }
                 }
@@ -127,7 +131,11 @@ public class Node : MonoBehaviour {
     {
         Debug.Log("Killed " + collision.gameObject);
         collidingObject = null;
+
+        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Remove(gameObject);
+
         killJoint();
+        miss = false;
     }
 
 	// Update is called once per frame
@@ -138,17 +146,34 @@ public class Node : MonoBehaviour {
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if(collidingObject != null)
+        if (collidingObject != null)
         {
-            float duration = 1.0F;
-            float lerp = Mathf.PingPong(Time.time, duration) / duration;
-            gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
+            gameObject.GetComponent<Renderer>().material.color = Color.blue;
             state = true;
+
+            if (!hit && collidingObject.tag == "Finish")
+            {
+                miss = true;
+                if (miss)
+                    gameObject.GetComponent<Renderer>().material.color = Color.white;
+            }
         }
-        else
+        else if(!miss)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
             state = false;
         }
+
+        if(sunk)
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+        else if(hit)
+        {
+            float duration = 1.0F;
+            float lerp = Mathf.PingPong(Time.time, duration) / duration;
+            gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
+        }
+
 	}
 }

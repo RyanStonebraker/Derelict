@@ -5,6 +5,7 @@ using UnityEngine;
 public class GeneralObject : MonoBehaviour {
 
     public GameObject collidingObject = null;
+    public List<GameObject> currentCollisions = new List<GameObject>();
 
     void OnCollisionEnter(Collision collision)
     {
@@ -12,6 +13,8 @@ public class GeneralObject : MonoBehaviour {
         if (collision.gameObject.tag == "Controller")
             setCollidingObject(collision);
     }
+
+
 
     private void setCollidingObject(Collision col)
     {
