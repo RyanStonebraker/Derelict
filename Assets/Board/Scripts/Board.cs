@@ -33,12 +33,12 @@ public class Board : MonoBehaviour {
 
     public void setHit(char row, int index)
     {
-        get(row, index).GetComponent<Node>().hit = !get(row, index).GetComponent<Node>().hit;
+        get(row, index).GetComponent<Node>().hit = true;
     }
 
     public void setSunk(char row, int index)
     {
-        get(row, index).GetComponent<Node>().sunk = !get(row, index).GetComponent<Node>().sunk;
+        get(row, index).GetComponent<Node>().sunk = true;
     }
 
     public void toggleMiss(char row, int index)
