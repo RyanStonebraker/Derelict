@@ -17,6 +17,7 @@ TagManager:
   - RowH
   - RowI
   - Board
+  - Controller
   layers:
   - Default
   - TransparentFX
