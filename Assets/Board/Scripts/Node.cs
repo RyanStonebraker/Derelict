@@ -10,7 +10,7 @@ public class Node : MonoBehaviour {
     public int jointBreakForce = 1000;
     public int jointTorqueBreakForce = 1000;
 	
-    private void joinObject()
+    public void joinObject()
     {
         var joint = addFixedJoint();
         joint.connectedBody = collidingObject.GetComponent<Rigidbody>();
