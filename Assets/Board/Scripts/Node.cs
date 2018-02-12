@@ -52,7 +52,8 @@ public class Node : MonoBehaviour {
            && collision.gameObject.tag != "RowG" 
            && collision.gameObject.tag != "RowH" 
            && collision.gameObject.tag != "RowI" 
-           && collision.gameObject.tag != "RowJ" )
+           && collision.gameObject.tag != "RowJ" 
+           && collision.gameObject.tag != "Controller")
         {
             Debug.Log("Impact with " + collision.gameObject);
             try

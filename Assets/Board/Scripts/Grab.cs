@@ -169,7 +169,9 @@ public class Grab : MonoBehaviour {
             {
                 if (objectInHand)
                 {
-                    objectInHand.GetComponent<Node>().joinObject();
+                    //if(objectInHand.GetComponent<Node>().collidingObject != null)
+                    //    objectInHand.GetComponent<Node>().joinObject();
+
                     releaseObject();
                 }
 
