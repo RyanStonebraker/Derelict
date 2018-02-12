@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114754021200386226}
   m_Layer: 0
   m_Name: Phil The Pill
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

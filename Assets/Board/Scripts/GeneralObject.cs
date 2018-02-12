@@ -8,7 +8,9 @@ public class GeneralObject : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        setCollidingObject(collision);
+        Debug.Log("Collided with " + collision.gameObject);
+        if (collision.gameObject.tag == "Controller")
+            setCollidingObject(collision);
     }
 
     private void setCollidingObject(Collision col)
@@ -22,13 +24,9 @@ public class GeneralObject : MonoBehaviour {
         collidingObject = col.gameObject;
     }
 
-    void onCollisionStay(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
-        setCollidingObject(collision);
-    }
-
-    void onCollisionExit(Collision collision)
-    {
+        Debug.Log("Exited with " + collision.gameObject);
         if (!collidingObject)
             return;
 
