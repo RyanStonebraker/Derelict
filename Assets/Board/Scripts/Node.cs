@@ -62,7 +62,7 @@ public class Node : MonoBehaviour {
                 //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                 setCollidingObject(collision);
 
-                if (!gameObject.GetComponent<FixedJoint>().connectedBody)
+                if (gameObject.GetComponent<FixedJoint>().connectedBody == null)
                 {
                     collision.gameObject.transform.parent = gameObject.transform;
                     joinObject();
@@ -98,7 +98,7 @@ public class Node : MonoBehaviour {
                 Debug.Log("Impact with " + collision.gameObject);
                 try
                 {
-                    if (!gameObject.GetComponent<FixedJoint>().connectedBody)
+                    if (gameObject.GetComponent<FixedJoint>().connectedBody == null)
                     {
                         //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                         setCollidingObject(collision);
