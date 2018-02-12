@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour {
 	public GameObject ship;
+	public Vector3 shipPosCopy;
 
 	public int HitCount;
+
+	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
+
+	public Vector3 SeaBoardLocation;
 
 	static private int instanceCount = 0;
 
@@ -16,17 +21,21 @@ public class ShipController : MonoBehaviour {
 	public string teamBoard = "AIBoard";
 
 	public void Awake() {
-		GetComponent<Renderer>().enabled = false;
-		ship = Instantiate(ship, gameObject.GetComponent<Renderer>().bounds.center + Vector3.forward, transform.rotation) as GameObject;
-		ship.gameObject.name = "Ship" + instanceCount.ToString();
-
 		LifeSpots = new ShipPiece[HitCount];
 
 		for (int i = 0; i < HitCount; ++i) {
 			LifeSpots[i].Dead = false;
-			LifeSpots[i].Row = -1;
-			LifeSpots[i].Col = -1;
+			LifeSpots[i].Row = 0;
+			LifeSpots[i].Col = 0;
 		}
+
+		GetComponent<Renderer>().enabled = false;
+		SeaBoardLocation = GameObject.Find("SeaBoard").GetComponent<Renderer>().bounds.center;
+		ship = Instantiate(ship, SeaBoardLocation + BoardSeparationAmount, transform.rotation) as GameObject;
+		ship.gameObject.name = "Ship" + instanceCount.ToString();
+		shipPosCopy = ship.gameObject.transform.position;
+
+
 		++instanceCount;
 	}
 
@@ -92,5 +101,7 @@ public class ShipController : MonoBehaviour {
 
 	public void Update () {
 		UpdateShip();
+
+		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
 	}
 }
