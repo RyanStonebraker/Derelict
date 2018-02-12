@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114754021200386226}
   m_Layer: 0
   m_Name: Phil The Pill
-  m_TagString: Respawn
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collidingObject: {fileID: 0}
+  currentCollisions: []
+  shipConstructor: []
+  shipSize: 3
+  shipName: 
+  flag: 1
 --- !u!136 &136343564595631302
 CapsuleCollider:
   m_ObjectHideFlags: 1

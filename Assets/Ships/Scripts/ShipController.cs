@@ -69,7 +69,7 @@ public class ShipController : MonoBehaviour {
 	public void UpdateShip () {
 		GameObject BoardObject = null;
 		try {
-		BoardObject = GameObject.Find(teamBoard);
+			BoardObject = GameObject.Find(teamBoard).gameObject;
 		if (BoardObject.GetComponent<Board>()) {
 			Debug.Log("GOT BOARD");
 		}
