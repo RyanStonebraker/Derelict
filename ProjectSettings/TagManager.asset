@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FxTemporaire
+  - projectile
+  - RowJ
+  - RowA
+  - RowB
+  - RowC
+  - RowD
+  - RowE
+  - RowF
+  - RowG
+  - RowH
+  - RowI
   layers:
   - Default
   - TransparentFX
