@@ -110,7 +110,12 @@ public class ShipController : MonoBehaviour {
 	public void Update () {
 		UpdateShip();
 
-		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+		if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
+			ship.transform.position = new Vector3(0, 0, 0);
+		}
+		else
+			ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+
 
 		if (ship.transform.eulerAngles.y != -90 && LifeSpots[0].Col == LifeSpots[1].Col) {
 			ship.transform.eulerAngles = new Vector3(0,-90,0);
