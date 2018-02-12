@@ -127,6 +127,15 @@ public class Node : MonoBehaviour {
         Destroy(GetComponent<FixedJoint>());
     }
 
+    private void resetColoring()
+    {
+        state = false;
+        hit = false;
+        sunk = false;
+        miss = false;
+        colorNodes();
+    }
+
     void OnTriggerExit(Collider collision)
     {
         Debug.Log("Killed " + collision.gameObject);
@@ -136,13 +145,14 @@ public class Node : MonoBehaviour {
 
         killJoint();
         miss = false;
+        resetColoring();
     }
 
-	// Update is called once per frame
-	void Update () {
-		if(shipPart != null)
+    public void colorNodes()
+    {
+        if (shipPart != null)
         {
-            GetComponent <Renderer>().enabled = false;
+            GetComponent<Renderer>().enabled = false;
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
@@ -158,22 +168,26 @@ public class Node : MonoBehaviour {
                     gameObject.GetComponent<Renderer>().material.color = Color.white;
             }
         }
-        else if(!miss)
+        else if (!miss)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
             state = false;
         }
 
-        if(sunk)
+        if (sunk)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
-        else if(hit)
+        else if (hit)
         {
             float duration = 1.0F;
             float lerp = Mathf.PingPong(Time.time, duration) / duration;
             gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
         }
+    }
 
+	// Update is called once per frame
+	void Update () {
+        colorNodes();
 	}
 }
