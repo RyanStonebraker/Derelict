@@ -100,7 +100,7 @@ public class Grab : MonoBehaviour {
 
     //release the object and transfer the velocity and angular velocity to the
     //object right before it's release for realistic effect.
-    private void releaseObject()
+    public void releaseObject()
     {
         if(GetComponent<FixedJoint>())
         {
