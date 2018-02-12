@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour {
 	public GameObject ship;
-	public Vector3 shipPosCopy;
+	private Vector3 shipPosCopy;
 
 	public int HitCount;
 
 	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
 
-	public Vector3 SeaBoardLocation;
+	private Vector3 SeaBoardLocation;
 
 	static private int instanceCount = 0;
 
@@ -20,7 +20,7 @@ public class ShipController : MonoBehaviour {
 	public ShipPiece [] LifeSpots;
 	public string teamBoard = "AIBoard";
 
-	public void Awake() {
+	public void Start() {
 		LifeSpots = new ShipPiece[HitCount];
 
 		for (int i = 0; i < HitCount; ++i) {
@@ -34,7 +34,6 @@ public class ShipController : MonoBehaviour {
 		ship = Instantiate(ship, SeaBoardLocation + BoardSeparationAmount, transform.rotation) as GameObject;
 		ship.gameObject.name = "Ship" + instanceCount.ToString();
 		shipPosCopy = ship.gameObject.transform.position;
-
 
 		++instanceCount;
 	}
@@ -103,5 +102,12 @@ public class ShipController : MonoBehaviour {
 		UpdateShip();
 
 		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+
+		if (ship.transform.eulerAngles.y != -90 && LifeSpots[0].Col == LifeSpots[1].Col) {
+			ship.transform.eulerAngles = new Vector3(0,-90,0);
+		}
+		else if (ship.transform.eulerAngles.y != 0 && LifeSpots[0].Row == LifeSpots[1].Row) {
+			ship.transform.eulerAngles = new Vector3(0,0,0);
+		}
 	}
 }
