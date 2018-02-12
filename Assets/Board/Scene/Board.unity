@@ -1405,6 +1405,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ffbff5b0fb0392d43b215e2ba5712add, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &162134613 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4792056137322260, guid: 211c2a6e5862b3047921cb5bcc34d698,
+    type: 2}
+  m_PrefabInternal: {fileID: 618582623}
 --- !u!4 &162540701 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4439420261166796, guid: ffbff5b0fb0392d43b215e2ba5712add,
@@ -3557,7 +3562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6c4ee9272a65c49a462ae8ece55c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 0}
+  objectToSpawn: {fileID: 162134613}
   objectInHand: {fileID: 0}
 --- !u!54 &564056363
 Rigidbody:
@@ -5273,11 +5278,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4439420261166796, guid: ffbff5b0fb0392d43b215e2ba5712add,
     type: 2}
   m_PrefabInternal: {fileID: 1534809247}
---- !u!4 &757736134 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4792056137322260, guid: 211c2a6e5862b3047921cb5bcc34d698,
-    type: 2}
-  m_PrefabInternal: {fileID: 100933358}
 --- !u!4 &759558549 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4439420261166796, guid: ffbff5b0fb0392d43b215e2ba5712add,
@@ -10689,7 +10689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6c4ee9272a65c49a462ae8ece55c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 757736134}
+  objectToSpawn: {fileID: 2144418714}
   objectInHand: {fileID: 0}
 --- !u!54 &1513389782
 Rigidbody:
@@ -15308,6 +15308,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4439420261166796, guid: ffbff5b0fb0392d43b215e2ba5712add,
     type: 2}
   m_PrefabInternal: {fileID: 1072642654}
+--- !u!4 &2144418714 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4792056137322260, guid: 211c2a6e5862b3047921cb5bcc34d698,
+    type: 2}
+  m_PrefabInternal: {fileID: 192917038}
 --- !u!4 &2144790325 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4439420261166796, guid: ffbff5b0fb0392d43b215e2ba5712add,
