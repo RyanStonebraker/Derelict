@@ -244,6 +244,10 @@ Prefab:
       value: 
       objectReference: {fileID: 1843171828121626, guid: 44c79bb89a3c34231a3192c9d49023e2,
         type: 2}
+    - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_Name
+      value: SubmarinePlayer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
   m_IsPrefabParent: 0
@@ -361,7 +365,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 772895242}
   m_LocalRotation: {x: 0.29810473, y: 0.36194718, z: 0.12336949, w: -0.87459004}
-  m_LocalPosition: {x: 1581.3533, y: -121.2829, z: 1115.6631}
+  m_LocalPosition: {x: 1703.3291, y: -254.41705, z: 993.5351}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
