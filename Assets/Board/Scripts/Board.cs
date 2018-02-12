@@ -7,6 +7,11 @@ public class Board : MonoBehaviour {
     public List<GameObject> nodes = new List<GameObject>(100);
     private int boardInitCount = 0;
 	
+    public int length()
+    {
+        return nodes.Count;
+    }
+
     public List<GameObject> getList()
     {
         return nodes;
