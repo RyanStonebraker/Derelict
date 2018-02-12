@@ -77,8 +77,10 @@ public class ShipController : MonoBehaviour {
 
 		if (BoardObject != null) {
 			for (int i = 0; i < LifeSpots.Length; ++i) {
-				if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col))
+				if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col)) {
 					LifeSpots[i].Dead = true;
+					BoardObject.GetComponent<Board>().setHit((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
+				}
 			}
 		}
 
@@ -92,6 +94,8 @@ public class ShipController : MonoBehaviour {
 		if (allDead) {
 			// TODO: Explosions? Boom
 			ship.gameObject.transform.localScale = new Vector3(0,0,0);
+			if (BoardObject != null)
+				BoardObject.GetComponent<Board>().setSunk((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
 		}
 		else if (!allDead && ship.gameObject.transform.localScale.x == 0) {
 			ship.gameObject.transform.localScale = new Vector3(1,1,1);
