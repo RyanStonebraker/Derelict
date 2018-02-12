@@ -168,7 +168,10 @@ public class Grab : MonoBehaviour {
             if (Controller.GetHairTriggerUp())
             {
                 if (objectInHand)
+                {
+                    objectInHand.GetComponent<Node>().joinObject();
                     releaseObject();
+                }
 
             }
 

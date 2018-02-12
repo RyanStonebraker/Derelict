@@ -7,8 +7,8 @@ public class Node : MonoBehaviour {
     public bool state = false;
     public GameObject shipPart = null;
     public GameObject collidingObject;
-    public int jointBreakForce = 5000;
-    public int jointTorqueBreakForce = 5000;
+    public int jointBreakForce = 1000;
+    public int jointTorqueBreakForce = 1000;
 	
     private void joinObject()
     {
@@ -52,13 +52,13 @@ public class Node : MonoBehaviour {
            && collision.gameObject.tag != "RowG" 
            && collision.gameObject.tag != "RowH" 
            && collision.gameObject.tag != "RowI" 
-           && collision.gameObject.tag != "RowJ")
+           && collision.gameObject.tag != "RowJ" )
         {
             Debug.Log("Impact with " + collision.gameObject);
             try
             {
                 setCollidingObject(collision);
-                joinObject();
+                //joinObject();
                 //snap();
             }
             catch
@@ -66,6 +66,19 @@ public class Node : MonoBehaviour {
                 Debug.Log("Error in joint");
             }
         }
+    }
+
+    private void killJoint()
+    {
+        GetComponent<FixedJoint>().connectedBody = null;
+        Destroy(GetComponent<FixedJoint>());
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        Debug.Log("Killed " + collision.gameObject);
+        collidingObject = null;
+        killJoint();
     }
 
 	// Update is called once per frame
