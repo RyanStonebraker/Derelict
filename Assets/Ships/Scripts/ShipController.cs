@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ShipController : MonoBehaviour {
 	public GameObject ship;
+
 	public int HitCount;
+
+	static private int instanceCount = 0;
 
 	[System.Serializable]
 	public struct ShipPiece { public bool Dead; public int Row; public int Col;}
@@ -15,9 +17,17 @@ public class ShipController : MonoBehaviour {
 
 	public void Awake() {
 		GetComponent<Renderer>().enabled = false;
-		Instantiate(ship, gameObject.GetComponent<Renderer>().bounds.center + Vector3.forward, transform.rotation);
+		ship = Instantiate(ship, gameObject.GetComponent<Renderer>().bounds.center + Vector3.forward, transform.rotation) as GameObject;
+		ship.gameObject.name = "Ship" + instanceCount.ToString();
 
 		LifeSpots = new ShipPiece[HitCount];
+
+		for (int i = 0; i < HitCount; ++i) {
+			LifeSpots[i].Dead = false;
+			LifeSpots[i].Row = -1;
+			LifeSpots[i].Col = -1;
+		}
+		++instanceCount;
 	}
 
 	// private int PieceToPosition (int pos) {
@@ -49,28 +59,38 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void UpdateShip () {
-		GameObject BoardObject;
+		GameObject BoardObject = null;
 		try {
-			BoardObject = GameObject.FindGameObjectsWithTag(teamBoard)[0];
-		} catch {
-			Debug.Log("MOOOO");
-			return;
+		BoardObject = GameObject.FindGameObjectsWithTag(teamBoard)[0];
+		}
+		catch {
+			Debug.Log("Board does not exist!");
 		}
 
-		for (int i = 0; i < LifeSpots.Length; ++i) {
-			if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col))
-				LifeSpots[i].Dead = true;
+		if (BoardObject != null) {
+			for (int i = 0; i < LifeSpots.Length; ++i) {
+				if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col))
+					LifeSpots[i].Dead = true;
+			}
 		}
 
 		bool allDead = true;
 		for (int i = 0; i < LifeSpots.Length; ++i) {
-			if (!LifeSpots[i].Dead)
+			if (!LifeSpots[i].Dead) {
 				allDead = false;
+			}
 		}
 
 		if (allDead) {
 			// TODO: Explosions? Boom
-			ship.GetComponent<Renderer>().enabled = false;
+			ship.gameObject.transform.localScale = new Vector3(0,0,0);
 		}
+		else if (!allDead && ship.gameObject.transform.localScale.x == 0) {
+			ship.gameObject.transform.localScale = new Vector3(1,1,1);
+		}
+	}
+
+	public void Update () {
+		UpdateShip();
 	}
 }
