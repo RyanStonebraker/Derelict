@@ -6,15 +6,27 @@ public class GeneralObject : MonoBehaviour {
 
     public GameObject collidingObject = null;
     public List<GameObject> currentCollisions = new List<GameObject>();
+    public List<Vector3> shipConstructor = new List<Vector3>();
+    public int shipSize = 3;
+    public string shipName = "";
+    public bool flag = true;
 
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collided with " + collision.gameObject);
         if (collision.gameObject.tag == "Controller")
             setCollidingObject(collision);
+
+        /******REMOVE THIS FOR DEMO******/
     }
 
-
+    private void populate()
+    {
+        foreach(GameObject node in currentCollisions)
+        {
+            shipConstructor.Add(new Vector3(0f, node.tag[3] - 'A', node.name[6] - '0'));
+        }
+    }
 
     private void setCollidingObject(Collision col)
     {
@@ -38,6 +50,18 @@ public class GeneralObject : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+
+        if(currentCollisions.Count == shipSize)
+        {
+            populate();
+        }
+
+        if (shipConstructor.Count == shipSize && flag)
+        {
+            Debug.Log("Before SetShip");
+            GameObject.Find(shipName + "Player").GetComponent<ShipController>().SetShip(shipConstructor);
+            Debug.Log("Called SetShip");
+            flag = !flag;
+        }
+    }
 }

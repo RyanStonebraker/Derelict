@@ -5,7 +5,6 @@ using UnityEngine;
 public class Board : MonoBehaviour {
 
     public List<GameObject> nodes = new List<GameObject>(100);
-    private int boardInitCount = 0;
 	
     public int length()
     {
@@ -59,8 +58,7 @@ public class Board : MonoBehaviour {
     
     void OnTriggerEnter(Collider collision)
     {
-        replace(collision.gameObject.tag[3], boardInitCount / 10, collision.gameObject);
-        boardInitCount++;
+        replace(collision.gameObject.tag[3], collision.gameObject.name[6] - '0', collision.gameObject);
         Debug.Log(collision.gameObject.tag + " " + collision.gameObject);
     }
 
