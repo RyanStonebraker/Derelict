@@ -236,13 +236,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
         type: 2}
       propertyPath: ship
       value: 
-      objectReference: {fileID: 1841599837346082, guid: 87f504e4734a8418e9557a08e420ed76,
+      objectReference: {fileID: 1843171828121626, guid: 44c79bb89a3c34231a3192c9d49023e2,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
@@ -360,12 +360,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 772895242}
-  m_LocalRotation: {x: 0.12376792, y: 0.54189944, z: 0.0810689, w: -0.82731754}
-  m_LocalPosition: {x: 2029.6401, y: -55.25995, z: 1345.9021}
+  m_LocalRotation: {x: 0.29810473, y: 0.36194718, z: 0.12336949, w: -0.87459004}
+  m_LocalPosition: {x: 1581.3533, y: -121.2829, z: 1115.6631}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!45 &772895245
 Skybox:
@@ -375,6 +375,58 @@ Skybox:
   m_GameObject: {fileID: 772895242}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 0}
+--- !u!1001 &826882974
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 390.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1591.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: ship
+      value: 
+      objectReference: {fileID: 1056229773894262, guid: b15aa99dac5a14dfcaf9c38aeaa82d7d,
+        type: 2}
+    - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+      propertyPath: m_Name
+      value: DynamicShip (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &899367013
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +573,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1370933057
+--- !u!1001 &2018632982
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -530,7 +582,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 970
+      value: 1072
       objectReference: {fileID: 0}
     - target: {fileID: 4301653410869940, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_LocalPosition.y
@@ -564,16 +616,11 @@ Prefab:
         type: 2}
       propertyPath: ship
       value: 
-      objectReference: {fileID: 1240463692796636, guid: eafcb16080bc24f8b969b6d5e87ab583,
+      objectReference: {fileID: 1306340617495512, guid: baf15776624a6488a90a4b01afe875cd,
         type: 2}
     - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_Name
       value: DynamicShip (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
-        type: 2}
-      propertyPath: HitCount
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
