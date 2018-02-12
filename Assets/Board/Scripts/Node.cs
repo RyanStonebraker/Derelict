@@ -42,23 +42,24 @@ public class Node : MonoBehaviour {
     void OnTriggerEnter (Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
-        if (collision.gameObject.tag != "Board" && collision.gameObject.tag != "RowA" 
-            && collision.gameObject.tag != "RowB" 
-            && collision.gameObject.tag != "RowC" 
-            && collision.gameObject.tag != "RowD" 
-            && collision.gameObject.tag != "RowE" 
-            && collision.gameObject.tag != "RowF" 
-            && collision.gameObject.tag != "RowG" 
-            && collision.gameObject.tag != "RowH" 
-            && collision.gameObject.tag != "RowI" 
-            && collision.gameObject.tag != "RowJ")
+        if (collision.gameObject.tag != "Board" 
+           && collision.gameObject.tag != "RowA" 
+           && collision.gameObject.tag != "RowB" 
+           && collision.gameObject.tag != "RowC" 
+           && collision.gameObject.tag != "RowD" 
+           && collision.gameObject.tag != "RowE" 
+           && collision.gameObject.tag != "RowF" 
+           && collision.gameObject.tag != "RowG" 
+           && collision.gameObject.tag != "RowH" 
+           && collision.gameObject.tag != "RowI" 
+           && collision.gameObject.tag != "RowJ")
         {
             Debug.Log("Impact with " + collision.gameObject);
             try
             {
                 setCollidingObject(collision);
                 joinObject();
-                snap();
+                //snap();
             }
             catch
             {

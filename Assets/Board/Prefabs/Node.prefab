@@ -114,8 +114,8 @@ MonoBehaviour:
   state: 0
   shipPart: {fileID: 0}
   collidingObject: {fileID: 0}
-  jointBreakForce: 5000
-  jointTorqueBreakForce: 5000
+  jointBreakForce: 1000
+  jointTorqueBreakForce: 1000
 --- !u!135 &135906572576275058
 SphereCollider:
   m_ObjectHideFlags: 1
