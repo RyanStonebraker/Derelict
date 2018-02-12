@@ -18,7 +18,7 @@ public class ShipController : MonoBehaviour {
 	public struct ShipPiece { public bool Dead; public int Row; public int Col;}
 
 	public ShipPiece [] LifeSpots;
-	public string teamBoard = "AIBoard";
+	public string teamBoard = "GameBoard-Hit";
 
 	public void Start() {
 		LifeSpots = new ShipPiece[HitCount];
@@ -69,7 +69,7 @@ public class ShipController : MonoBehaviour {
 	public void UpdateShip () {
 		GameObject BoardObject = null;
 		try {
-		BoardObject = GameObject.FindGameObjectsWithTag(teamBoard)[0];
+		BoardObject = GameObject.Find(teamBoard);
 		}
 		catch {
 			Debug.Log("Board does not exist!");
