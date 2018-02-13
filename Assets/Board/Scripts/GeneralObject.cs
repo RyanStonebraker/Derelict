@@ -61,7 +61,7 @@ public class GeneralObject : MonoBehaviour {
             Debug.Log("Before SetShip");
             GameObject.Find(shipName + "Player").GetComponent<ShipController>().SetShip(shipConstructor);
             Debug.Log("Called SetShip");
-            flag = !flag;
+            flag = !!flag;
         }
     }
 }
