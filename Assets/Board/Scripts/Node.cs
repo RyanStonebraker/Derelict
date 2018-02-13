@@ -142,6 +142,7 @@ public class Node : MonoBehaviour {
         collidingObject = null;
 
         collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Remove(gameObject);
+        collision.gameObject.GetComponent<GeneralObject>().shipConstructor.Clear();
 
         killJoint();
         miss = false;

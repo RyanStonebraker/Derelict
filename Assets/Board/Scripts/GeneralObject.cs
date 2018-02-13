@@ -51,7 +51,7 @@ public class GeneralObject : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if(currentCollisions.Count == shipSize)
+        if(currentCollisions.Count == shipSize && shipConstructor.Count < shipSize)
         {
             populate();
         }
