@@ -1,7 +1,3 @@
-_|_|_|    _|_|_|_|  _|_|_|    _|_|_|_|  _|        _|_|_|    _|_|_|  _|_|_|_|_|  
-_|    _|  _|        _|    _|  _|        _|          _|    _|            _|      
-_|    _|  _|_|_|    _|_|_|    _|_|_|    _|          _|    _|            _|      
-_|    _|  _|        _|    _|  _|        _|          _|    _|            _|      
-_|_|_|    _|_|_|_|  _|    _|  _|_|_|_|  _|_|_|_|  _|_|_|    _|_|_|      _|                                                                               
+# Derelict                                                               
                                                                                
-## A battleship game in Virtual Reality using Unity and SteamVR.
+## A battleship game in Virtual Reality using Unity and SteamVR
