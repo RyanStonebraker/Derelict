@@ -70,13 +70,15 @@ The ships scene makes it easy to test out new ship models by dynamically spawnin
 ![Waterfront Scene](waterfront.png)
 The waterfront scene is a cumulative interactive test. This scene is most akin to real gameplay and allows for quick interaction with the board, actual environment, and the ships. If this scene compiles, ships can be placed on the board, and can live update ship position on the water, then no changes broke the code base.
 
+### Testing Layout
+![Testing Layout](TestingScheme.png)
+
+Individual tests: Board, Ships, and Terrain Scenes
+
+Collective test: Test Scene (A.K.A Waterfront)
+
 ### Running the Test
 Unlike traditional languages and projects that support test driven development, C# and Unity offer no obvious frameworks to fulfil those needs. In place of this, we use the Waterfront Scene as our “test environment” and run a series of requirements to ensure changes we make in scripts do not change the expected output. Our development phase is greatly centered on pair programming. Fundamental aspects of the game were planned out, as a group, in blocks before development began. These blocks are terrain, testing, board, ship spawning, and web/multiplayer. Each main topic is separated into its own scene, for example, the board has its own scene where changes are made to scripts and visual appearance, while the ship spawning topic has a completely different scene,  independant of the board. The testing scene (now named Waterfront) combines all the individual scenes together and serves as a testing environment purposed with ensuring everything works together as a unit; further independent testing is done within the individual scenes. By using prefabs, changes made to individual scenes are automatically updated in the testing scene, meaning if a feature is added to an individual scene that brakes the interactions with the other scenes, we know about it and can fix it. Such a testing scheme is not ideal, however, it is current the best means for testing VR since there is no VR simulator that can test applications without a VR headset and controllers. 
-
-###Testing Layout
-![Testing Layout](TestingScheme.png)
-> Individual tests: Board, Ships, and Terrain Scenes
-> Collective test: Test Scene (A.K.A Waterfront)
 
 ## Program Flow
 
