@@ -214,14 +214,13 @@ public class Node : MonoBehaviour {
 
             if (theShotWasAMiss())
                 setNodeToMissState();
-        }
-        else if (!miss)
-            setNodeToDefaultState();
-        
-        if (sunk)
+        }        
+        else if (sunk)
             setNodeToSunkState();
         else if (hit)
-            setNodeToHitState();   
+            setNodeToHitState();
+        else
+            setNodeToDefaultState();
     }
 
 	// Update is called once per frame
