@@ -42,25 +42,29 @@ public class Node : MonoBehaviour {
         collidingObject.transform.rotation = gameObject.transform.rotation;
     }
 
+    private bool collisionIsWithBattleshipPiece(Collider collision)
+    {
+        return collision.gameObject.tag != "Board"
+           && collision.gameObject.tag != "RowA"
+           && collision.gameObject.tag != "RowB"
+           && collision.gameObject.tag != "RowC"
+           && collision.gameObject.tag != "RowD"
+           && collision.gameObject.tag != "RowE"
+           && collision.gameObject.tag != "RowF"
+           && collision.gameObject.tag != "RowG"
+           && collision.gameObject.tag != "RowH"
+           && collision.gameObject.tag != "RowI"
+           && collision.gameObject.tag != "RowJ"
+           && collision.gameObject.tag != "Controller";
+    }
+
     void OnTriggerEnter (Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
 
         collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
         
-        if (collision.gameObject.tag != "Board" 
-           && collision.gameObject.tag != "RowA" 
-           && collision.gameObject.tag != "RowB" 
-           && collision.gameObject.tag != "RowC" 
-           && collision.gameObject.tag != "RowD" 
-           && collision.gameObject.tag != "RowE" 
-           && collision.gameObject.tag != "RowF" 
-           && collision.gameObject.tag != "RowG" 
-           && collision.gameObject.tag != "RowH" 
-           && collision.gameObject.tag != "RowI" 
-           && collision.gameObject.tag != "RowJ" 
-           && collision.gameObject.tag != "Controller"
-           /*&& collision.gameObject.GetComponent<GeneralObject>().collidingObject.tag == "Controller"*/)
+        if (collisionIsWithBattleshipPiece(collision))
         {
             Debug.Log("Impact with " + collision.gameObject);
             try
@@ -84,39 +88,24 @@ public class Node : MonoBehaviour {
 
     void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.tag != "Board")
+        if (collisionIsWithBattleshipPiece(collision))
         {
-            if (collision.gameObject.tag != "Board"
-               && collision.gameObject.tag != "RowA"
-               && collision.gameObject.tag != "RowB"
-               && collision.gameObject.tag != "RowC"
-               && collision.gameObject.tag != "RowD"
-               && collision.gameObject.tag != "RowE"
-               && collision.gameObject.tag != "RowF"
-               && collision.gameObject.tag != "RowG"
-               && collision.gameObject.tag != "RowH"
-               && collision.gameObject.tag != "RowI"
-               && collision.gameObject.tag != "RowJ"
-               && collision.gameObject.tag != "Controller"
-               /*&& collision.gameObject.GetComponent<GeneralObject>().collidingObject.tag == "Controller"*/)
+           
+            try
             {
-               
-                try
+                if (gameObject.GetComponent<FixedJoint>() == null)
                 {
-                    if (gameObject.GetComponent<FixedJoint>() == null)
-                    {
-                        //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
-                        setCollidingObject(collision);
-                        collision.gameObject.transform.parent = gameObject.transform;
-                        joinObject();
-                        miss = true;
-                        //snap();
-                    }
+                    //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
+                    setCollidingObject(collision);
+                    collision.gameObject.transform.parent = gameObject.transform;
+                    joinObject();
+                    miss = true;
+                    //snap();
                 }
-                catch
-                {
-                    Debug.Log("Error in joint");
-                }
+            }
+            catch
+            {
+                Debug.Log("Error in joint");
             }
         }
     }
