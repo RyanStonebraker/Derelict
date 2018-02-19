@@ -208,14 +208,14 @@ public class Node : MonoBehaviour {
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if (ToString(gameObject) == "GameBoard-Set")
+        if (gameObject.name == "GameBoard-Set")
         {
             if (collidingObject != null)
                 setNodeToOccupiedState();
             else
                 setNodeToDefaultState();
         }
-        else if (ToString(gameObject) == "GameBoard-Hit")
+        else if (gameObject.name == "GameBoard-Hit")
         {
             if (theShotWasAMiss())
                 setNodeToMissState();
