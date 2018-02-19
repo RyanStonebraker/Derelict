@@ -104,9 +104,10 @@ As of current, there are no precompiled versions of Derelict. In order to run De
 > Commit messages of this style were implemented starting on 02/18/18
 
 ## Authors
-
 * **[Ryan Stonebraker](https://github.com/RyanStonebraker)**
 * **[Tristan Van Cise](https://github.com/grubbly)**
+
+[Author Journal Entries](JournalEntries.md)
 
 ## License
 
