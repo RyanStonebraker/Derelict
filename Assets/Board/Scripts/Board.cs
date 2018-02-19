@@ -58,17 +58,19 @@ public class Board : MonoBehaviour {
     
     void OnTriggerEnter(Collider collision)
     {
-        replace(collision.gameObject.tag[3], collision.gameObject.name[6] - '0', collision.gameObject);
+        //row and index data are stored as part of object naming convention
+        char row = collision.gameObject.tag[3];
+        int index = collision.gameObject.name[6] - '0';
+
+        replace(row, index, collision.gameObject);
+
+        //debug print format: "Row <char> node <#>"
         Debug.Log(collision.gameObject.tag + " " + collision.gameObject);
     }
 
     void OnTriggerStay(Collider collision)
     {
-        
+        //Proto
     }
 
-    // Update is called once per frame
-    void Update () {
-        
-	}
 }
