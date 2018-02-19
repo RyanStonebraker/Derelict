@@ -13,8 +13,9 @@ public class Node : MonoBehaviour {
     public bool sunk = false;
     public bool miss = false;
 	
-    public void joinObject()
+    public void joinObject(Collider collision)
     {
+        collision.gameObject.transform.parent = gameObject.transform;
         var joint = addFixedJoint();
         joint.connectedBody = collidingObject.GetComponent<Rigidbody>();
         Debug.Log("Joint Created with " + collidingObject.gameObject);
@@ -58,11 +59,21 @@ public class Node : MonoBehaviour {
            && collision.gameObject.tag != "Controller";
     }
 
+    private void addNodeToBattleshipCollisionList(Collider collision)
+    {
+        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
+    }
+
+    private bool nodeNotJoinedWithBattleshipPiece()
+    {
+        return gameObject.GetComponent<FixedJoint>() == null;
+    }
+
     void OnTriggerEnter (Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
 
-        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
+        addNodeToBattleshipCollisionList(collision);
         
         if (collisionIsWithBattleshipPiece(collision))
         {
@@ -71,17 +82,15 @@ public class Node : MonoBehaviour {
             {
                 setCollidingObject(collision);
 
-                if (gameObject.GetComponent<FixedJoint>() == null)
-                {
-                    collision.gameObject.transform.parent = gameObject.transform;
-                    joinObject();
-                }
-                //snap();
+                if (nodeNotJoinedWithBattleshipPiece())
+                    joinObject(collision);
+                //snap(); //Work in progress
             }
             catch
             {
-                Debug.Log("Error in joint");
+                Debug.Log("Error in joint connection when object entered collider");
             }
+            
         }
     }
 
@@ -91,18 +100,17 @@ public class Node : MonoBehaviour {
         {
             try
             {
-                if (gameObject.GetComponent<FixedJoint>() == null)
+                if (nodeNotJoinedWithBattleshipPiece())
                 {
                     setCollidingObject(collision);
-                    collision.gameObject.transform.parent = gameObject.transform;
-                    joinObject();
+                    joinObject(collision);
                     miss = true;
-                    //snap();
+                    //snap(); //Work in progress
                 }
             }
             catch
             {
-                Debug.Log("Error in joint");
+                Debug.Log("Error in joint connection while object is in collider");
             }
         }
     }
@@ -146,9 +154,46 @@ public class Node : MonoBehaviour {
         resetColoring();
     }
 
+    //color the node blue and set the node as occupied with battleship piece
+    private void setNodeToOccupiedState()
+    {
+        gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        state = true;
+    }
+
+    private void setNodeToMissState()
+    {
+        miss = true;
+        if (miss)
+            gameObject.GetComponent<Renderer>().material.color = Color.white;
+    }
+
+    private void setNodeToDefaultState()
+    {
+        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        state = false;
+    }
+
+    private void setNodeToHitState()
+    {
+        float duration = 1.0F;
+        float lerp = Mathf.PingPong(Time.time, duration) / duration;
+        gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
+    }
+
+    private void setNodeToSunkState()
+    {
+        gameObject.GetComponent<Renderer>().material.color = Color.red;
+    }
+
+    private bool theShotWasAMiss()
+    {
+        return (!hit && collidingObject.tag == "Finish");
+    }
+
     public void colorNodes()
     {
-        if (shipPart != null)
+        if (shipPart != null) //test if this is doing anything
         {
             GetComponent<Renderer>().enabled = false;
             Instantiate(shipPart, transform.position, transform.rotation);
@@ -156,32 +201,18 @@ public class Node : MonoBehaviour {
 
         if (collidingObject != null)
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
-            state = true;
+            setNodeToOccupiedState();
 
-            if (!hit && collidingObject.tag == "Finish")
-            {
-                miss = true;
-                if (miss)
-                    gameObject.GetComponent<Renderer>().material.color = Color.white;
-            }
+            if (theShotWasAMiss())
+                setNodeToMissState();
         }
         else if (!miss)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.green;
-            state = false;
-        }
-
+            setNodeToDefaultState();
+        
         if (sunk)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
-        }
+            setNodeToSunkState();
         else if (hit)
-        {
-            float duration = 1.0F;
-            float lerp = Mathf.PingPong(Time.time, duration) / duration;
-            gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
-        }
+            setNodeToHitState();   
     }
 
 	// Update is called once per frame
