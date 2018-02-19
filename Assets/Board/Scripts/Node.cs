@@ -69,7 +69,6 @@ public class Node : MonoBehaviour {
             Debug.Log("Impact with " + collision.gameObject);
             try
             {
-                //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                 setCollidingObject(collision);
 
                 if (gameObject.GetComponent<FixedJoint>() == null)
@@ -90,12 +89,10 @@ public class Node : MonoBehaviour {
     {
         if (collisionIsWithBattleshipPiece(collision))
         {
-           
             try
             {
                 if (gameObject.GetComponent<FixedJoint>() == null)
                 {
-                    //collision.gameObject.GetComponent<GeneralObject>().collidingObject.GetComponent<Grab>().releaseObject();
                     setCollidingObject(collision);
                     collision.gameObject.transform.parent = gameObject.transform;
                     joinObject();
@@ -125,16 +122,27 @@ public class Node : MonoBehaviour {
         colorNodes();
     }
 
-    void OnTriggerExit(Collider collision)
+    private void resetBattleshipCollisionsList(Collider collision)
+    {
+        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Remove(gameObject);
+        collision.gameObject.GetComponent<GeneralObject>().shipConstructor.Clear();
+    }
+
+    private void removeReferenceToCollidedObject(Collider collision)
     {
         Debug.Log("Killed " + collision.gameObject);
         collidingObject = null;
+    }
 
-        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Remove(gameObject);
-        collision.gameObject.GetComponent<GeneralObject>().shipConstructor.Clear();
-
+    void OnTriggerExit(Collider collision)
+    {
+        removeReferenceToCollidedObject(collision);
+        resetBattleshipCollisionsList(collision);
         killJoint();
-        miss = false;
+
+        // make the node turn green when the battleship piece exits
+
+        miss = false; 
         resetColoring();
     }
 
