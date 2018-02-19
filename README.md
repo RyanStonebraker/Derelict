@@ -10,6 +10,8 @@
 
 A virtual reality battleship game.
 
+[![Derelict VR](https://img.youtube.com/vi/pcQfRWxC5eY/0.jpg)](https://youtu.be/pcQfRWxC5eY)
+
 ## Getting Started
 
 Derelict is an MIT licensed Battleship game developed for virtual reality using Unity and SteamVR. It has been tested to work on both the Oculus Rift and HTC Vive. Currently, playing is restricted to the developer release only and the below developer instructions must be followed to test out the current build. When more gameplay has been added in the future, release candidate builds will be created for easier use.
