@@ -171,7 +171,6 @@ public class Node : MonoBehaviour {
     private void setNodeToOccupiedState()
     {
         gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        state = true;
     }
 
     private void setNodeToMissState()
@@ -211,6 +210,9 @@ public class Node : MonoBehaviour {
             GetComponent<Renderer>().enabled = false;
             Instantiate(shipPart, transform.position, transform.rotation);
         }
+
+        if(collidingObject != null)
+            state = true;
 
         if (boardType == "PlacementBoard")
         {
