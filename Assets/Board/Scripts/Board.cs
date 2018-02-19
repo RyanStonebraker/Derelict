@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿// Board.cs
+// Derelict
+// CS 372
+// Tristan Van Cise
+// Ryan Stonebraker
+// Acts as a wrapper class around node.cs, board can interact directly with
+// node states and track which objects are in each node. On gamestart, a List
+// (nodes) is populated with all nodes in contact with the board. This list can
+// be viewed within unity during runtime to see board state updates at runtime. 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

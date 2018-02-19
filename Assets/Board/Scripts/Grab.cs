@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// Grab.cs
+// Derelict
+// CS 372
+// Tristan Van Cise
+// Ryan Stonebraker
+// VR controller script
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿// Node.cs
+// Derelict
+// CS 372
+// Tristan Van Cise
+// Ryan Stonebraker
+// Creates joints with valids objects, interacts with placeable
+// battleship piece collision list, and changes/updates node states
+// depending on hit, sunk, and miss booleans.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

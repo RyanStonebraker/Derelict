@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿// GeneralObject.cs
+// Derelict
+// CS 372
+// Tristan Van Cise
+// Ryan Stonebraker
+// Controls board interactable objects like shot markers
+// and mini battleship pieces
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,20 +56,21 @@ public class GeneralObject : MonoBehaviour {
         collidingObject = null;
     }
 
+    void spawnShipOnMainScene()
+    {
+        Debug.Log("Before SetShip");
+        GameObject.Find(shipName + "Player").GetComponent<ShipController>().SetShip(shipConstructor);
+        Debug.Log("Called SetShip");
+        flag = !!flag; //toggle editor mode here
+    }
+
     // Update is called once per frame
     void Update () {
 
         if(currentCollisions.Count == shipSize && shipConstructor.Count < shipSize)
-        {
             populate();
-        }
 
         if (shipConstructor.Count == shipSize && flag)
-        {
-            Debug.Log("Before SetShip");
-            GameObject.Find(shipName + "Player").GetComponent<ShipController>().SetShip(shipConstructor);
-            Debug.Log("Called SetShip");
-            flag = !!flag;
-        }
+            spawnShipOnMainScene();   
     }
 }
