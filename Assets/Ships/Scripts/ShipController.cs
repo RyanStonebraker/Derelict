@@ -18,7 +18,7 @@ public class ShipController : MonoBehaviour {
 	public struct ShipPiece { public bool Dead; public int Row; public int Col;}
 
 	public ShipPiece [] LifeSpots;
-	public string teamBoard = "GameBoard-Hit";
+	public string teamBoard = "Playerboard";
 
 	public void Start() {
 		LifeSpots = new ShipPiece[HitCount];
@@ -49,7 +49,7 @@ public class ShipController : MonoBehaviour {
 		}
 	}
 
-	public bool checkHit(GameObject & BoardObject, int shipPiece) {
+	public bool checkHit(GameObject BoardObject, int shipPiece) {
 		return BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[shipPiece].Row), LifeSpots[shipPiece].Col);
 	}
 
