@@ -21,6 +21,7 @@ public class Node : MonoBehaviour {
     public bool hit = false;
     public bool sunk = false;
     public bool miss = false;
+    public string boardType = "";
 	
     public void joinObject(Collider collision)
     {
@@ -81,6 +82,9 @@ public class Node : MonoBehaviour {
     void OnTriggerEnter (Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
+
+        if (boardType == "" && collision.gameObject.tag == "Board")
+            boardType = collision.gameObject.name;
 
         addNodeToBattleshipCollisionList(collision);
         
@@ -208,14 +212,14 @@ public class Node : MonoBehaviour {
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if (gameObject.name == "GameBoard-Set")
+        if (boardType == "PlacementBoard")
         {
             if (collidingObject != null)
                 setNodeToOccupiedState();
             else
                 setNodeToDefaultState();
         }
-        else if (gameObject.name == "GameBoard-Hit")
+        else if (boardType == "PlayerBoard")
         {
             if (theShotWasAMiss())
                 setNodeToMissState();
