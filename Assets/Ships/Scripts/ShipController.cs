@@ -49,7 +49,7 @@ public class ShipController : MonoBehaviour {
 		}
 	}
 
-	public bool checkHit(int shipPiece) {
+	public bool checkHit(GameObject & BoardObject, int shipPiece) {
 		return BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[shipPiece].Row), LifeSpots[shipPiece].Col);
 	}
 
@@ -72,7 +72,7 @@ public class ShipController : MonoBehaviour {
 
 		if (BoardObject != null) {
 			for (int shipPiece = 0; shipPiece < LifeSpots.Length; ++shipPiece) {
-				if (checkHit(shipPiece)) {
+				if (checkHit(BoardObject, shipPiece)) {
 					BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
 					LifeSpots[shipPiece].Dead = true;
 					BoardObject.GetComponent<Board>().setHit(getRow(shipPiece), getCol(shipPiece));
