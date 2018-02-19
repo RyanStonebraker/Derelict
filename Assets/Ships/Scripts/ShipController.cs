@@ -38,23 +38,6 @@ public class ShipController : MonoBehaviour {
 		++instanceCount;
 	}
 
-	// private int PieceToPosition (int pos) {
-	// 	ShipPiece loc;
-	// 	loc.Dead = false;
-	//
-	// 	loc.Row = Mathf.Floor(pos / 10);
-	// 	loc.Col = pos % 10;
-	//
-	// 	return loc;
-	// }
-	//
-	// private int PositionToPiece (int row, int col) {
-	// 	return row * 10 + col;
-	// }
-
-	// pieceList: x -> Dead? 0 - Not Dead, 1 = Dead
-	// pieceList: y -> Row
-	// pieceList: z -> Col
 	public void SetShip (List<Vector3> pieceList) {
 		HitCount = pieceList.Count;
 		LifeSpots = new ShipPiece[HitCount];
@@ -64,6 +47,18 @@ public class ShipController : MonoBehaviour {
 			LifeSpots[i].Row = (int)pieceList[i].y;
 			LifeSpots[i].Col = (int)pieceList[i].z;
 		}
+	}
+
+	public bool checkHit(int shipPiece) {
+		return BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[shipPiece].Row), LifeSpots[shipPiece].Col);
+	}
+
+	public char getRow (int shipPiece) {
+		return (char)('A' + LifeSpots[shipPiece].Row);
+	}
+
+	public int getCol (int shipPiece) {
+		return LifeSpots[shipPiece].Col;
 	}
 
 	public void UpdateShip () {
@@ -76,11 +71,11 @@ public class ShipController : MonoBehaviour {
 		}
 
 		if (BoardObject != null) {
-			for (int i = 0; i < LifeSpots.Length; ++i) {
-				if (BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col)) {
-					BoardObject.GetComponent<Board>().toggleMiss((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
-					LifeSpots[i].Dead = true;
-					BoardObject.GetComponent<Board>().setHit((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
+			for (int shipPiece = 0; shipPiece < LifeSpots.Length; ++shipPiece) {
+				if (checkHit(shipPiece)) {
+					BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
+					LifeSpots[shipPiece].Dead = true;
+					BoardObject.GetComponent<Board>().setHit(getRow(shipPiece), getCol(shipPiece));
 				}
 			}
 		}
@@ -98,7 +93,7 @@ public class ShipController : MonoBehaviour {
 			if (BoardObject != null) {
 				// Sets all nodes to sunk
 				for (int i = 0; i < LifeSpots.Length; ++i) {
-					BoardObject.GetComponent<Board>().setSunk((char)('A' + LifeSpots[i].Row), LifeSpots[i].Col);
+					BoardObject.GetComponent<Board>().setSunk(getRow(i), getCol(i));
 				}
 			}
 		}
@@ -107,21 +102,32 @@ public class ShipController : MonoBehaviour {
 		}
 	}
 
-	public void Update () {
-		UpdateShip();
+	public void placeShipOnWaterGrid () {
+		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+	}
 
-		if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
-			ship.transform.position = new Vector3(0, 0, 0);
-		}
-		else
-			ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+	public void hideShip () {
+		ship.transform.position = new Vector3(0, 0, 0);
+	}
 
-
+	public void setShipRotation () {
 		if (ship.transform.eulerAngles.y != -90 && LifeSpots[0].Col == LifeSpots[1].Col) {
 			ship.transform.eulerAngles = new Vector3(0,-90,0);
 		}
 		else if (ship.transform.eulerAngles.y != 0 && LifeSpots[0].Row == LifeSpots[1].Row) {
 			ship.transform.eulerAngles = new Vector3(0,0,0);
 		}
+	}
+
+	public void Update () {
+		UpdateShip();
+
+		if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
+			hideShip();
+		}
+		else
+			placeShipOnWaterGrid();
+
+		setShipRotation();
 	}
 }
