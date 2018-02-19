@@ -208,19 +208,24 @@ public class Node : MonoBehaviour {
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if (collidingObject != null)
+        if (ToString(gameObject) == "GameBoard-Set")
         {
-            setNodeToOccupiedState();
-
+            if (collidingObject != null)
+                setNodeToOccupiedState();
+            else
+                setNodeToDefaultState();
+        }
+        else if (ToString(gameObject) == "GameBoard-Hit")
+        {
             if (theShotWasAMiss())
                 setNodeToMissState();
-        }        
-        else if (sunk)
-            setNodeToSunkState();
-        else if (hit)
-            setNodeToHitState();
-        else
-            setNodeToDefaultState();
+            else if (sunk)
+                setNodeToSunkState();
+            else if (hit)
+                setNodeToHitState();
+            else
+                setNodeToDefaultState();
+        }
     }
 
 	// Update is called once per frame
