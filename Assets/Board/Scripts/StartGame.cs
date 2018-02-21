@@ -23,20 +23,20 @@ public class StartGame : MonoBehaviour {
 
     private void lockShipsInPlace()
     {
-        submarine.GetComponent<FixedJoint>().breakForce = uint.MaxValue;
-        submarine.GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
+        submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
 
-        battleship.GetComponent<FixedJoint>().breakForce = uint.MaxValue;
-        battleship.GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        //battleship.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
+        //battleship.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
 
-        radarShip.GetComponent<FixedJoint>().breakForce = uint.MaxValue;
-        radarShip.GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        //radarShip.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
+        //radarShip.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
 
-        cruiser.GetComponent<FixedJoint>().breakForce = uint.MaxValue;
-        cruiser.GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        //cruiser.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
+        //cruiser.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
 
-        aircraftCarrier.GetComponent<FixedJoint>().breakForce = uint.MaxValue;
-        aircraftCarrier.GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        //aircraftCarrier.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
+        //aircraftCarrier.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
     }
 
     private void initGame()
@@ -48,8 +48,8 @@ public class StartGame : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision Registered on Enter");
-        editMode = false;
         initGame();
+        editMode = false;
     }
 	
 	// Update is called once per frame
