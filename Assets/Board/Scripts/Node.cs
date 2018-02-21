@@ -36,6 +36,13 @@ public class Node : MonoBehaviour {
         FixedJoint joint = gameObject.AddComponent<FixedJoint>();
         joint.breakForce = jointBreakForce;
         joint.breakTorque = jointTorqueBreakForce;
+
+        if (collidingObject.tag == "Shot")
+        {
+            joint.breakForce = jointBreakForce * 1000;
+            joint.breakTorque = jointTorqueBreakForce * 1000;
+        }
+
         return joint;
     }
 
@@ -225,7 +232,7 @@ public class Node : MonoBehaviour {
             else
                 setNodeToDefaultState();
         }
-        else if (boardType == "PlayerBoard")
+        else if (boardType == "PlayerBoard" || collidingObject.tag == "Shot")
         {
             if (theShotWasAMiss())
                 setNodeToMissState();
