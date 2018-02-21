@@ -54,7 +54,7 @@ public class AI : MonoBehaviour {
 
     private void generateNextShot()
     {
-        currentShot = Instantiate(SHOTPREFAB, GameObject.Find("Controller (Right)").transform.position + new Vector3(0, 2.0f, 0), GameObject.Find("Controller (Right)").transform.rotation);
+        currentShot = Instantiate(SHOTPREFAB, GameObject.Find("Controller (right)").transform.position + new Vector3(0, 2.0f, 0), GameObject.Find("Controller (right)").transform.rotation);
     }
 
     private void fireAtPlayer()
