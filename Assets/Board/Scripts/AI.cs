@@ -25,8 +25,8 @@ public class AI : MonoBehaviour {
 
     private void getBoardReferences()
     {
-        PlayerBoard = GameObject.Find("GameBoard-Set");
-        AIBoard = GameObject.Find("GameBoard-Hit");
+        PlayerBoard = GameObject.Find("PlacementBoard");
+        AIBoard = GameObject.Find("PlayerBoard");
     }
 
     //Aircraft = 5
