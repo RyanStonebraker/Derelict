@@ -84,6 +84,9 @@ public class Node : MonoBehaviour {
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
 
+        if (collision.gameObject.tag == "Shot")
+            collision.gameObject.GetComponent<ShotPiece>().attachedToNode = true;
+
         if (boardType == "" && collision.gameObject.tag == "Board")
             boardType = collision.gameObject.name;
 
@@ -174,7 +177,7 @@ public class Node : MonoBehaviour {
         gameObject.GetComponent<Renderer>().material.color = Color.blue;
     }
 
-    private void setNodeToMissState()
+    public void setNodeToMissState()
     {
         miss = true;
         if (miss)
@@ -187,14 +190,14 @@ public class Node : MonoBehaviour {
         state = false;
     }
 
-    private void setNodeToHitState()
+    public void setNodeToHitState()
     {
         float duration = 1.0F;
         float lerp = Mathf.PingPong(Time.time, duration) / duration;
         gameObject.GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.blue, lerp);
     }
 
-    private void setNodeToSunkState()
+    public void setNodeToSunkState()
     {
         gameObject.GetComponent<Renderer>().material.color = Color.red;
     }

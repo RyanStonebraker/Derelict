@@ -19,6 +19,8 @@ TagManager:
   - Board
   - Controller
   - Fragment
+  - Shot
+  - Opponent
   layers:
   - Default
   - TransparentFX
