@@ -66,7 +66,8 @@ public class Node : MonoBehaviour {
            && collision.gameObject.tag != "RowH"
            && collision.gameObject.tag != "RowI"
            && collision.gameObject.tag != "RowJ"
-           && collision.gameObject.tag != "Controller";
+           && collision.gameObject.tag != "Controller"
+           && collision.gameObject.tag != "Fragment";
     }
 
     private void addNodeToBattleshipCollisionList(Collider collision)

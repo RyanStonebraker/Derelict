@@ -18,6 +18,7 @@ TagManager:
   - RowI
   - Board
   - Controller
+  - Fragment
   layers:
   - Default
   - TransparentFX

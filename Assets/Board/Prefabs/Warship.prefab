@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65850645785843674}
   - component: {fileID: 114268201196442628}
   m_Layer: 0
-  m_Name: Warship 1
+  m_Name: Warship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

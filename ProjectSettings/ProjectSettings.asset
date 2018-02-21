@@ -724,7 +724,7 @@ PlayerSettings:
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 31d7d6d7-78aa-4791-a01d-ed080a5e9f2d
-  projectName: 
+  projectName: Derelict
   organizationId: tristan-van-cise
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
