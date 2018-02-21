@@ -67,7 +67,7 @@ public class AI : MonoBehaviour {
         while (true)
         {
             int coord = rng.Next(100);
-            bool hit = playerNodes[coord].GetComponent<Node>().state;
+            bool hit = playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
             bool miss = !playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
             Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
@@ -75,12 +75,14 @@ public class AI : MonoBehaviour {
             {
                 playerNodes[coord].GetComponent<Node>().hit = true;
                 playerNodes[coord].GetComponent<Node>().setNodeToHitState();
+                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI LANDED A HIT!");
                 break;
             }
             else if(miss)
             {
                 playerNodes[coord].GetComponent<Node>().setNodeToMissState();
+                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI MISSED!");
                 break;
             }
@@ -103,7 +105,7 @@ public class AI : MonoBehaviour {
             stopCheck = true;
             fireAtPlayer();
             Debug.Log("Fired at player");
-            Wait(6, () => { generateNextShot(); });
+            Wait(1, () => { generateNextShot(); });
             Debug.Log("Spawned next shot");
         }
     }

@@ -180,7 +180,7 @@ public class Grab : MonoBehaviour {
                 if (collidingObject)
                     grabObject();
 
-                adjustScale(Controller.GetAxis().y);
+                //adjustScale(Controller.GetAxis().y);
             }
 
             if (Controller.GetHairTriggerUp())
