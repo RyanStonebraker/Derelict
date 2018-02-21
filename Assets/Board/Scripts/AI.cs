@@ -42,21 +42,21 @@ public class AI : MonoBehaviour {
             AIBoard.GetComponent<Board>().nodes[i].GetComponent<Node>().state = true;
 
         for(int i = 0; i < 4; i++)
-            AIBoard.GetComponent<Board>().nodes[10*i].GetComponent<Node>().state = true;
+            AIBoard.GetComponent<Board>().nodes[10 + i].GetComponent<Node>().state = true;
 
         for(int i = 0; i < 3; i++)
-            AIBoard.GetComponent<Board>().nodes[20*i].GetComponent<Node>().state = true;
+            AIBoard.GetComponent<Board>().nodes[20 + i].GetComponent<Node>().state = true;
 
         for (int i = 0; i < 3; i++)
-            AIBoard.GetComponent<Board>().nodes[30 * i].GetComponent<Node>().state = true;
+            AIBoard.GetComponent<Board>().nodes[30 + i].GetComponent<Node>().state = true;
 
         for (int i = 0; i < 2; i++)
-            AIBoard.GetComponent<Board>().nodes[40 * i].GetComponent<Node>().state = true;
+            AIBoard.GetComponent<Board>().nodes[40 + i].GetComponent<Node>().state = true;
     }
 
     private void generateNextShot()
     {
-        currentShot = Instantiate(SHOTPREFAB, GameObject.Find("Controller (right)").transform.position + new Vector3(0, 2.0f, 0), GameObject.Find("Controller (right)").transform.rotation);
+        currentShot = Instantiate(SHOTPREFAB, new Vector3(1131.301f, 365.357f, 1461.777f), Quaternion.identity);
         stopCheck = false;
     }
 
@@ -102,7 +102,7 @@ public class AI : MonoBehaviour {
             stopCheck = true;
             fireAtPlayer();
             Debug.Log("Fired at player");
-            Wait(4, () => { generateNextShot(); });
+            Wait(6, () => { generateNextShot(); });
             Debug.Log("Spawned next shot");
         }
     }

@@ -204,7 +204,7 @@ public class Node : MonoBehaviour {
 
     private bool theShotWasAMiss()
     {
-        return (!hit && collidingObject.tag == "Finish");
+        return (!hit && (collidingObject.tag == "Finish" || collidingObject.tag == "Shot"));
     }
 
     public void colorNodes()
