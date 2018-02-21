@@ -69,6 +69,7 @@ public class AI : MonoBehaviour {
             int coord = rng.Next(100);
             bool hit = playerNodes[coord].GetComponent<Node>().state;
             bool miss = !playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
+            Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
             if (hit)
             {

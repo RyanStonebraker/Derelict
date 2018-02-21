@@ -211,7 +211,7 @@ public class Node : MonoBehaviour {
 
     private bool theShotWasAMiss()
     {
-        return (!hit && (collidingObject.tag == "Finish" || collidingObject.tag == "Shot"));
+        return (!hit && (collidingObject.tag == "Finish"));
     }
 
     public void colorNodes()
@@ -232,7 +232,7 @@ public class Node : MonoBehaviour {
             else
                 setNodeToDefaultState();
         }
-        else if (boardType == "PlayerBoardAI" || collidingObject.tag == "Shot")
+        else if (boardType == "PlayerBoardAI")
         {
             if (theShotWasAMiss())
                 setNodeToMissState();
@@ -245,8 +245,26 @@ public class Node : MonoBehaviour {
         }
     }
 
+    private void colorShot()
+    {
+        Debug.Log("Inside colorShot");
+
+        if (state)
+        {
+            hit = true;
+            setNodeToHitState();
+        }
+        else
+        {
+            setNodeToMissState();
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
-        colorNodes();
+        if(collidingObject.tag == "Shot")
+            colorShot();
+        else
+            colorNodes();
 	}
 }
