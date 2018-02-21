@@ -232,7 +232,7 @@ public class Node : MonoBehaviour {
             else
                 setNodeToDefaultState();
         }
-        else if (boardType == "PlayerBoard" || collidingObject.tag == "Shot")
+        else if (boardType == "PlayerBoardAI" || collidingObject.tag == "Shot")
         {
             if (theShotWasAMiss())
                 setNodeToMissState();
