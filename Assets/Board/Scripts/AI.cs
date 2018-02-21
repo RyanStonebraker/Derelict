@@ -10,6 +10,8 @@ public class AI : MonoBehaviour {
     public GameObject AIBoard = null;
     public GameObject currentShot = null;
 
+    public bool stopCheck = false;
+
     System.Random rng = new System.Random();
 
     public void Wait(float seconds, Action action)
@@ -55,6 +57,7 @@ public class AI : MonoBehaviour {
     private void generateNextShot()
     {
         currentShot = Instantiate(SHOTPREFAB, GameObject.Find("Controller (right)").transform.position + new Vector3(0, 2.0f, 0), GameObject.Find("Controller (right)").transform.rotation);
+        stopCheck = false;
     }
 
     private void fireAtPlayer()
@@ -94,8 +97,9 @@ public class AI : MonoBehaviour {
             generateNextShot();
         }
 
-        if(currentShot.GetComponent<ShotPiece>().attachedToNode)
+        if(currentShot.GetComponent<ShotPiece>().attachedToNode && !stopCheck)
         {
+            stopCheck = true;
             fireAtPlayer();
             Debug.Log("Fired at player");
             Wait(4, () => { generateNextShot(); });
