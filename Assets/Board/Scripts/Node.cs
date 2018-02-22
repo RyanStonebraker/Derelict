@@ -174,7 +174,8 @@ public class Node : MonoBehaviour {
 
         // make the node turn green when the battleship piece exits
 
-        miss = false; 
+        miss = false;
+        collidingObject = null;
         resetColoring();
     }
 
@@ -216,18 +217,18 @@ public class Node : MonoBehaviour {
 
     public void colorNodes()
     {
-        if (shipPart != null) //test if this is doing anything
+        if (shipPart) //test if this is doing anything
         {
             GetComponent<Renderer>().enabled = false;
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if(collidingObject != null)
+        if(collidingObject)
             state = true;
 
         if (boardType == "PlacementBoard")
         {
-            if (collidingObject != null)
+            if (collidingObject)
                 setNodeToOccupiedState();
             else
                 setNodeToDefaultState();
@@ -260,11 +261,11 @@ public class Node : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update () {
-        if(collidingObject.tag == "Shot")
-            colorShot();
-        else
-            colorNodes();
+    // Update is called once per frame
+    void Update() {
+            if (collidingObject && collidingObject.tag == "Shot")
+                colorShot();
+            else
+                colorNodes();
 	}
 }

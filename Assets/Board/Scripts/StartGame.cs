@@ -15,7 +15,7 @@ public class StartGame : MonoBehaviour {
     private void findShips()
     {
         submarine = GameObject.Find("Submarine");
-        battleship = GameObject.Find("");
+        battleship = GameObject.Find("Warship");
         radarShip = GameObject.Find("");
         cruiser = GameObject.Find("");
         aircraftCarrier = GameObject.Find("");
@@ -26,8 +26,8 @@ public class StartGame : MonoBehaviour {
         submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
         submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
 
-        //battleship.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
-        //battleship.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
+        battleship.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
+        battleship.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
 
         //radarShip.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
         //radarShip.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;

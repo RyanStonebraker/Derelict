@@ -14,8 +14,10 @@ public class ShipController : MonoBehaviour {
 
 	static private int instanceCount = 0;
 
+    public string SeaboardName = "SeaBoard";
+
 	[System.Serializable]
-	public struct ShipPiece { public bool Dead; public int Row; public int Col;}
+	public struct ShipPiece { public bool isDead; public int Row; public int Col;}
 
 	public ShipPiece [] LifeSpots;
 	public string teamBoard = "Playerboard";
@@ -24,13 +26,13 @@ public class ShipController : MonoBehaviour {
 		LifeSpots = new ShipPiece[HitCount];
 
 		for (int i = 0; i < HitCount; ++i) {
-			LifeSpots[i].Dead = false;
+			LifeSpots[i].isDead = false;
 			LifeSpots[i].Row = 0;
 			LifeSpots[i].Col = 0;
 		}
 
 		GetComponent<Renderer>().enabled = false;
-		SeaBoardLocation = GameObject.Find("SeaBoard").GetComponent<Renderer>().bounds.center;
+		SeaBoardLocation = GameObject.Find(SeaboardName).GetComponent<Renderer>().bounds.center;
 		ship = Instantiate(ship, SeaBoardLocation + BoardSeparationAmount, transform.rotation) as GameObject;
 		ship.gameObject.name = "Ship" + instanceCount.ToString();
 		shipPosCopy = ship.gameObject.transform.position;
@@ -43,7 +45,7 @@ public class ShipController : MonoBehaviour {
 		LifeSpots = new ShipPiece[HitCount];
 
 		for (int i = 0; i < HitCount; ++i) {
-			LifeSpots[i].Dead = (int)pieceList[i].x == 0 ? false : true;
+			LifeSpots[i].isDead = (int)pieceList[i].x == 0 ? false : true;
 			LifeSpots[i].Row = (int)pieceList[i].y;
 			LifeSpots[i].Col = (int)pieceList[i].z;
 		}
@@ -74,7 +76,7 @@ public class ShipController : MonoBehaviour {
 			for (int shipPiece = 0; shipPiece < LifeSpots.Length; ++shipPiece) {
 				if (checkHit(BoardObject, shipPiece)) {
 					BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
-					LifeSpots[shipPiece].Dead = true;
+					LifeSpots[shipPiece].isDead = true;
 					BoardObject.GetComponent<Board>().setHit(getRow(shipPiece), getCol(shipPiece));
 				}
 			}
@@ -82,7 +84,7 @@ public class ShipController : MonoBehaviour {
 
 		bool allDead = true;
 		for (int i = 0; i < LifeSpots.Length; ++i) {
-			if (!LifeSpots[i].Dead) {
+			if (!LifeSpots[i].isDead) {
 				allDead = false;
 			}
 		}

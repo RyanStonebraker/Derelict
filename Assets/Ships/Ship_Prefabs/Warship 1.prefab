@@ -19,9 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4866108245066822}
-  - component: {fileID: 54918438013048784}
-  - component: {fileID: 65962607872968818}
-  - component: {fileID: 114919436163232086}
   m_Layer: 0
   m_Name: Warship 1
   m_TagString: Untagged
@@ -54,7 +51,7 @@ Transform:
   m_GameObject: {fileID: 1003411001822712}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1131.5, y: 364.34, z: 1460.978}
-  m_LocalScale: {x: 0.0011601662, y: 0.0012445502, z: 0.001033583}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4883339719392664}
   m_Father: {fileID: 0}
@@ -114,47 +111,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585593953334406}
   m_Mesh: {fileID: 4300000, guid: 17da68f7830a448288721a454a7bf3c1, type: 3}
---- !u!54 &54918438013048784
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1003411001822712}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65962607872968818
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1003411001822712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114919436163232086
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1003411001822712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f084490a710b44ca38928a456469a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collidingObject: {fileID: 0}
-  currentCollisions: []
-  shipConstructor: []
-  shipSize: 3
-  shipName: Warship
-  flag: 1
