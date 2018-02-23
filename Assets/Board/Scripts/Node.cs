@@ -223,26 +223,28 @@ public class Node : MonoBehaviour {
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if(collidingObject)
+        if (collidingObject)
+        {
             state = true;
 
-        if (boardType == "PlacementBoard")
-        {
-            if (collidingObject)
-                setNodeToOccupiedState();
-            else
-                setNodeToDefaultState();
-        }
-        else if (boardType == "PlayerBoardAI")
-        {
-            if (theShotWasAMiss())
-                setNodeToMissState();
-            else if (sunk)
-                setNodeToSunkState();
-            else if (hit)
-                setNodeToHitState();
-            else
-                setNodeToDefaultState();
+            if (boardType == "PlacementBoard")
+            {
+                if (collidingObject)
+                    setNodeToOccupiedState();
+                else
+                    setNodeToDefaultState();
+            }
+            else if (boardType == "PlayerBoardAI")
+            {
+                if (theShotWasAMiss())
+                    setNodeToMissState();
+                else if (sunk)
+                    setNodeToSunkState();
+                else if (hit)
+                    setNodeToHitState();
+                else
+                    setNodeToDefaultState();
+            }
         }
     }
 
