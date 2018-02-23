@@ -38,20 +38,120 @@ public class AI : MonoBehaviour {
     //RadarShip = 2
     private void setAIShips()
     {
-        for(int i = 0; i < 5; i++)
-            AIBoard.GetComponent<Board>().nodes[i].GetComponent<Node>().state = true;
+        randomSpawnShip(5);
+        randomSpawnShip(4);
+        randomSpawnShip(3);
+        randomSpawnShip(3);
+        randomSpawnShip(2);
+    }
 
-        for(int i = 0; i < 4; i++)
-            AIBoard.GetComponent<Board>().nodes[10 + i].GetComponent<Node>().state = true;
+    private void randomSpawnShip(int shipLength)
+    {
+        int initPosition = rng.Next(100);
+        int rotation = rng.Next(4);
 
-        for(int i = 0; i < 3; i++)
-            AIBoard.GetComponent<Board>().nodes[20 + i].GetComponent<Node>().state = true;
+        switch(rotation)
+        {
+            case 0: //left
+                if (checkLeftPlacement(initPosition, shipLength))
+                    for (int shipPos = 0; shipPos < shipLength; shipPos++)
+                    {
+                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().state = true;
+                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                    }
+                else
+                    randomSpawnShip(shipLength);
+            break;
 
-        for (int i = 0; i < 3; i++)
-            AIBoard.GetComponent<Board>().nodes[30 + i].GetComponent<Node>().state = true;
+            case 1: //right
+                if (checkRightPlacement(initPosition, shipLength))
+                    for (int shipPos = 0; shipPos < shipLength; shipPos++)
+                    {
+                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().state = true;
+                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                    }
+                else
+                    randomSpawnShip(shipLength);
+                break;
 
-        for (int i = 0; i < 2; i++)
-            AIBoard.GetComponent<Board>().nodes[40 + i].GetComponent<Node>().state = true;
+            case 2: //up
+                if (checkUpPlacement(initPosition, shipLength))
+                    for (int shipPos = 0; shipPos < shipLength; shipPos++)
+                    {
+                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().state = true;
+                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                    }
+                else
+                    randomSpawnShip(shipLength);
+                break;
+
+            case 3: //down
+                if (checkDownPlacement(initPosition, shipLength))
+                    for (int shipPos = 0; shipPos < shipLength; shipPos++)
+                    {
+                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().state = true;
+                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                    }
+                else
+                    randomSpawnShip(shipLength);
+                break;
+
+            default:
+                Debug.Log("***Bad rotation random number generated***");
+            break;
+        }
+
+    }
+
+    private bool edgeCaseWrap(int piecesRemaining, int currentPos, int modVal)
+    {
+        return (piecesRemaining != 1) && (currentPos % 10 == modVal);
+    }
+
+    private bool checkLeftPlacement(int initPos, int shipLength)
+    {
+        for(int posCheck = 0; posCheck < shipLength; posCheck++)
+        {
+            if ((initPos - posCheck) < 0 || 
+                AIBoard.GetComponent<Board>().nodes[initPos - posCheck].GetComponent<Node>().state || 
+                edgeCaseWrap((shipLength-posCheck),(initPos-posCheck),0))
+                return false;
+        }
+        return true;
+    }
+
+    private bool checkRightPlacement(int initPos, int shipLength)
+    {
+        for (int posCheck = 0; posCheck < shipLength; posCheck++)
+        {
+            if ((initPos + posCheck) > 99 || 
+                AIBoard.GetComponent<Board>().nodes[initPos + posCheck].GetComponent<Node>().state ||
+                edgeCaseWrap((shipLength - posCheck), (initPos + posCheck), 9))
+                return false;
+        }
+        return true;
+    }
+
+    private bool checkUpPlacement(int initPos, int shipLength)
+    {
+        for (int posCheck = 0; posCheck < shipLength; posCheck++)
+        {
+            if ((initPos - 10*posCheck) < 0 || 
+                AIBoard.GetComponent<Board>().nodes[initPos - 10*posCheck].GetComponent<Node>().state)
+                return false;
+        }
+        return true;
+    }
+
+    private bool checkDownPlacement(int initPos, int shipLength)
+    {
+        for (int posCheck = 0; posCheck < shipLength; posCheck++)
+        {
+            if ((initPos + 10*posCheck) > 99 || 
+                AIBoard.GetComponent<Board>().nodes[initPos + 10*posCheck].GetComponent<Node>().state)
+                return false;
+        }
+        return true;
     }
 
     private void generateNextShot()
@@ -100,13 +200,16 @@ public class AI : MonoBehaviour {
             generateNextShot();
         }
 
-        if(currentShot.GetComponent<ShotPiece>().attachedToNode && !stopCheck)
+        if (currentShot)
         {
-            stopCheck = true;
-            fireAtPlayer();
-            Debug.Log("Fired at player");
-            Wait(1, () => { generateNextShot(); });
-            Debug.Log("Spawned next shot");
+            if (currentShot.GetComponent<ShotPiece>().attachedToNode && !stopCheck)
+            {
+                stopCheck = true;
+                fireAtPlayer();
+                Debug.Log("Fired at player");
+                Wait(1, () => { generateNextShot(); });
+                Debug.Log("Spawned next shot");
+            }
         }
     }
 }
