@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 23878406295646340}
   - component: {fileID: 102524186186016180}
   m_Layer: 0
-  m_Name: Winning 1
+  m_Name: Losing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090886327277764}
-  m_Text: You Win!
+  m_Text: You Lose!
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -90,9 +90,9 @@ TextMesh:
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 0
-  m_FontStyle: 1
+  m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4278213643
+    rgba: 4278190243
