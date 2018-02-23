@@ -13,6 +13,9 @@ public class ShipController : MonoBehaviour {
 
 	public int HitCount;
 
+	public int ShipBlockWidth = 50;
+	public int ShipBlockHeight = 50;
+
 	private bool sunk = false;
 
 	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
@@ -40,6 +43,7 @@ public class ShipController : MonoBehaviour {
 
 		GetComponent<Renderer>().enabled = false;
 		SeaBoardLocation = GameObject.Find(SeaboardName).GetComponent<Renderer>().bounds.center;
+
 		ship = Instantiate(ship, SeaBoardLocation + BoardSeparationAmount, transform.rotation) as GameObject;
 		ship.gameObject.name = "Ship" + instanceCount.ToString();
 		shipPosCopy = ship.gameObject.transform.position;
@@ -151,18 +155,39 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void placeShipOnWaterGrid () {
-		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * BoardSeparationAmount.x, 0, LifeSpots[0].Col * BoardSeparationAmount.z);
+		int widthAdjust = (isColumnAligned()) ? HitCount * ShipBlockWidth : 0;
+		int heightAdjust = (isRowAligned()) ? HitCount * ShipBlockHeight : 0;
+
+		ship.transform.position = shipPosCopy + new Vector3(LifeSpots[0].Row * -BoardSeparationAmount.x - widthAdjust, 0, LifeSpots[0].Col * -BoardSeparationAmount.z + heightAdjust);
 	}
 
 	public void hideShip () {
 		ship.transform.position = new Vector3(0, 0, 0);
 	}
 
+	private bool isColumnAligned () {
+		return LifeSpots[0].Col == LifeSpots[1].Col;
+	}
+
+	private bool isRowAligned () {
+		return LifeSpots[0].Row == LifeSpots[1].Row;
+	}
+
+	private bool rotationSet () {
+		if (isColumnAligned ())
+			return ship.transform.eulerAngles.y == -90;
+		else if (isRowAligned ())
+			return ship.transform.eulerAngles.y == 0;
+
+		return false;
+		Debug.Log(gameObject.name + " PLACEMENT NOT SET CORRECTLY!");
+	}
+
 	public void setShipRotation () {
-		if (ship.transform.eulerAngles.y != -90 && LifeSpots[0].Col == LifeSpots[1].Col) {
+		if (!rotationSet() && isColumnAligned()) {
 			ship.transform.eulerAngles = new Vector3(0,-90,0);
 		}
-		else if (ship.transform.eulerAngles.y != 0 && LifeSpots[0].Row == LifeSpots[1].Row) {
+		else if (!rotationSet() && isRowAligned()) {
 			ship.transform.eulerAngles = new Vector3(0,0,0);
 		}
 	}
