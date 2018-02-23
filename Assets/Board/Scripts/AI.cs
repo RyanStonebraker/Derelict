@@ -243,6 +243,7 @@ public class AI : MonoBehaviour {
             Debug.Log("AI INITIATED");
             getBoardReferences();
             setAIShips();
+            PlayerBoard.GetComponent<Board>().MoveToPosition(PlayerBoard.transform, PlayerBoard.transform.position + new Vector3(4f, 0f, 3f), 4);
             generateNextShot();
         }
 
