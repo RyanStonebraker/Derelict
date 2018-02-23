@@ -277,8 +277,8 @@ public class Node : MonoBehaviour
     private void colorShot()
     {
         Debug.Log("Inside colorShot");
-
-        if (state)
+        state = true;
+        if (occupied)
         {
             hit = true;
             setNodeToHitState();
