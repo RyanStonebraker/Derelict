@@ -132,6 +132,11 @@ public class ShipController : MonoBehaviour {
 			doEndExplosion();
 			sunk = true;
 
+			if (teamBoard == "PlayerBoardAI")
+				GameObject.Find("EndGame").GetComponent<HealthTracker>().removeEnemyShip();
+			else
+				GameObject.Find("EndGame").GetComponent<HealthTracker>().removePlayerShip();
+
 			// removeShip();
 			if (BoardObject != null) {
 				// Sets all nodes to sunk
