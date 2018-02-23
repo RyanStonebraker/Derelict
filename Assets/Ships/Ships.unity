@@ -430,8 +430,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 772895242}
-  m_LocalRotation: {x: 0.35875532, y: 0.6121521, z: 0.36395058, w: -0.60341066}
-  m_LocalPosition: {x: 1296.7786, y: -246.29376, z: 1446.424}
+  m_LocalRotation: {x: -0.18867248, y: 0.029766029, z: 0.0057224785, w: 0.9815722}
+  m_LocalPosition: {x: 944.97064, y: 69.898254, z: 744.75995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -488,7 +488,7 @@ Prefab:
         type: 2}
       propertyPath: ship
       value: 
-      objectReference: {fileID: 1056229773894262, guid: b15aa99dac5a14dfcaf9c38aeaa82d7d,
+      objectReference: {fileID: 1933865538784820, guid: baf15776624a6488a90a4b01afe875cd,
         type: 2}
     - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_Name
@@ -832,7 +832,7 @@ Prefab:
         type: 2}
       propertyPath: ship
       value: 
-      objectReference: {fileID: 1306340617495512, guid: baf15776624a6488a90a4b01afe875cd,
+      objectReference: {fileID: 1630413760432700, guid: 7217e64333e9d4cbb948baca6c2b6760,
         type: 2}
     - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_Name
@@ -840,6 +840,31 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1964601297956614, guid: e0189fefcc093469ea72e7782baa2c41, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: isHit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 8e02e06584f51ab42986fd44c73d976e, type: 2}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: smokeTrails
+      value: 
+      objectReference: {fileID: 100000, guid: 8e02e06584f51ab42986fd44c73d976e, type: 2}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: endExplosion
+      value: 
+      objectReference: {fileID: 100000, guid: dc533b4ca16d3cd4d94b4d9e8b3376f0, type: 2}
+    - target: {fileID: 114292568723718418, guid: e0189fefcc093469ea72e7782baa2c41,
+        type: 2}
+      propertyPath: HitCount
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

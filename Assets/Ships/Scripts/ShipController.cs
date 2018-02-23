@@ -6,7 +6,14 @@ public class ShipController : MonoBehaviour {
 	public GameObject ship;
 	private Vector3 shipPosCopy;
 
+	public GameObject explosion;
+	public GameObject endExplosion;
+	public GameObject smokeTrails;
+	public GameObject missile;
+
 	public int HitCount;
+
+	private bool sunk = false;
 
 	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
 
@@ -63,6 +70,35 @@ public class ShipController : MonoBehaviour {
 		return LifeSpots[shipPiece].Col;
 	}
 
+	public void doExplosion () {
+		Vector3 posSave = ship.transform.position;
+		posSave = new Vector3(posSave.x + Random.Range(-25, 25), posSave.y + Random.Range(50,125), posSave.z + Random.Range(-100,50));
+
+		Instantiate(explosion, posSave, transform.rotation);
+	}
+
+	public void doEndExplosion () {
+		shootMissile();
+		Vector3 posSave = ship.transform.position;
+		posSave = new Vector3(posSave.x + Random.Range(-25, 25), posSave.y + Random.Range(50,125), posSave.z + Random.Range(-100,50));
+
+		ship.GetComponent<Rigidbody>().velocity = new Vector3(0, -10, 0);
+
+		endExplosion = Instantiate(endExplosion, posSave, transform.rotation) as GameObject;
+	}
+
+	public void shootMissile () {
+		Vector3 aboveShip = ship.transform.position;
+		aboveShip = new Vector3(aboveShip.x, aboveShip.y + 500, aboveShip.z);
+		missile = Instantiate(missile, aboveShip, transform.rotation) as GameObject;
+		missile.GetComponent<Rigidbody>().velocity = new Vector3(0, -100, 0);
+		// missile.GetComponent<Rigidbody>().velocity = new Vector3(missile.GetComponent<Rigidbody>().velocity.x, missile.GetComponent<Rigidbody>().velocity.y, missile.GetComponent<Rigidbody>().velocity.z + 10);
+	}
+
+	public void removeShip() {
+		ship.gameObject.transform.localScale = new Vector3(0,0,0);
+	}
+
 	public void UpdateShip () {
 		GameObject BoardObject = null;
 		try {
@@ -74,10 +110,13 @@ public class ShipController : MonoBehaviour {
 
 		if (BoardObject != null) {
 			for (int shipPiece = 0; shipPiece < LifeSpots.Length; ++shipPiece) {
-				if (checkHit(BoardObject, shipPiece)) {
+				if (LifeSpots[shipPiece].isDead == false && checkHit(BoardObject, shipPiece)) {
 					BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
 					LifeSpots[shipPiece].isDead = true;
+
 					BoardObject.GetComponent<Board>().setHit(getRow(shipPiece), getCol(shipPiece));
+
+					doExplosion();
 				}
 			}
 		}
@@ -90,8 +129,10 @@ public class ShipController : MonoBehaviour {
 		}
 
 		if (allDead) {
-			// TODO: Explosions? Boom
-			ship.gameObject.transform.localScale = new Vector3(0,0,0);
+			doEndExplosion();
+			sunk = true;
+
+			// removeShip();
 			if (BoardObject != null) {
 				// Sets all nodes to sunk
 				for (int i = 0; i < LifeSpots.Length; ++i) {
@@ -122,14 +163,16 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void Update () {
-		UpdateShip();
+		if (!sunk) {
+			UpdateShip();
 
-		if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
-			hideShip();
+			if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
+				hideShip();
+			}
+			else
+				placeShipOnWaterGrid();
+
+			setShipRotation();
 		}
-		else
-			placeShipOnWaterGrid();
-
-		setShipRotation();
 	}
 }

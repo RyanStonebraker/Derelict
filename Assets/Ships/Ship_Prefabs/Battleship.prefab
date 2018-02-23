@@ -189,6 +189,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4446883088541582}
+  - component: {fileID: 54443757235970772}
   m_Layer: 0
   m_Name: Battleship
   m_TagString: Untagged
@@ -759,3 +760,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1469224909422298}
   m_Mesh: {fileID: 4300010, guid: c7c018c3e3cb64494beb99ecc1681b6c, type: 3}
+--- !u!54 &54443757235970772
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630413760432700}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
