@@ -38,62 +38,107 @@ public class AI : MonoBehaviour {
     //RadarShip = 2
     private void setAIShips()
     {
-        randomSpawnShip(5);
-        randomSpawnShip(4);
-        randomSpawnShip(3);
-        randomSpawnShip(3);
-        randomSpawnShip(2);
+        randomSpawnShip(5,"AircraftCarrierEnemy");
+        randomSpawnShip(4,"BattleshipEnemy");
+        randomSpawnShip(3, "SubmarineEnemy");
+        randomSpawnShip(3, "WarshipEnemy");
+        randomSpawnShip(2, "LandingCraftEnemy");
     }
 
-    private void randomSpawnShip(int shipLength)
+    private void randomSpawnShip(int shipLength, string shipName)
     {
         int initPosition = rng.Next(100);
         int rotation = rng.Next(4);
+        List<Vector3> shipNodes = new List<Vector3>();
 
         switch(rotation)
         {
             case 0: //left
                 if (checkLeftPlacement(initPosition, shipLength))
+                {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
-                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().state = true;
-                       // AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().occupied = true;
+                        GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - shipPos];
+                        shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
+                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
+                    if (shipName != "")
+                    {
+                        GameObject.Find(shipName).GetComponent<ShipController>().SetShip(shipNodes);
+                        Debug.Log(shipNodes + " Called SetShip in AI.cs");
+                        for (int i = 0; i < shipNodes.Count; i++)
+                            Debug.Log("Alive: " + shipNodes[i].x + " Row " + (char)(shipNodes[i].y + 'A') + " Index " + shipNodes[i].z);
+                    }
+                }
                 else
-                    randomSpawnShip(shipLength);
+                    randomSpawnShip(shipLength, shipName);
             break;
 
             case 1: //right
                 if (checkRightPlacement(initPosition, shipLength))
+                {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
-                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().state = true;
-                        //AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().occupied = true;
+                        GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + shipPos];
+                        shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
+                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
+                    if (shipName != "")
+                    {
+                        GameObject.Find(shipName).GetComponent<ShipController>().SetShip(shipNodes);
+                        Debug.Log(shipNodes + " Called SetShip in AI.cs");
+                        for (int i = 0; i < shipNodes.Count; i++)
+                            Debug.Log("Alive: " + shipNodes[i].x + " Row " + (char)(shipNodes[i].y + 'A') + " Index " + shipNodes[i].z);
+                    }
+                }
                 else
-                    randomSpawnShip(shipLength);
+                    randomSpawnShip(shipLength, shipName);
                 break;
 
             case 2: //up
                 if (checkUpPlacement(initPosition, shipLength))
+                {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
-                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().state = true;
-                        //AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().occupied = true;
+                        GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos];
+                        shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
+                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
+                    if (shipName != "")
+                    {
+                        GameObject.Find(shipName).GetComponent<ShipController>().SetShip(shipNodes);
+                        Debug.Log(shipNodes + " Called SetShip in AI.cs");
+                        for (int i = 0; i < shipNodes.Count; i++)
+                            Debug.Log("Alive: " + shipNodes[i].x + " Row " + (char)(shipNodes[i].y + 'A') + " Index " + shipNodes[i].z);
+                    }
+                }
                 else
-                    randomSpawnShip(shipLength);
+                    randomSpawnShip(shipLength, shipName);
                 break;
 
             case 3: //down
                 if (checkDownPlacement(initPosition, shipLength))
+                {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
-                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().state = true;
-                        //AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().occupied = true;
+                        GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos];
+                        shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
+                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
+                    if (shipName != "")
+                    {
+                        GameObject.Find(shipName).GetComponent<ShipController>().SetShip(shipNodes);
+                        Debug.Log(shipNodes + " Called SetShip in AI.cs");
+                        for (int i = 0; i < shipNodes.Count; i++)
+                            Debug.Log("Alive: " + shipNodes[i].x + " Row " + (char)(shipNodes[i].y + 'A') + " Index " + shipNodes[i].z);
+                    }
+                }
                 else
-                    randomSpawnShip(shipLength);
+                    randomSpawnShip(shipLength, shipName);
                 break;
 
             default:
@@ -113,7 +158,7 @@ public class AI : MonoBehaviour {
         for(int posCheck = 0; posCheck < shipLength; posCheck++)
         {
             if ((initPos - posCheck) < 0 || 
-                AIBoard.GetComponent<Board>().nodes[initPos - posCheck].GetComponent<Node>().state || 
+                AIBoard.GetComponent<Board>().nodes[initPos - posCheck].GetComponent<Node>().occupied || 
                 edgeCaseWrap((shipLength-posCheck),(initPos-posCheck),0))
                 return false;
         }
@@ -125,7 +170,7 @@ public class AI : MonoBehaviour {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
             if ((initPos + posCheck) > 99 || 
-                AIBoard.GetComponent<Board>().nodes[initPos + posCheck].GetComponent<Node>().state ||
+                AIBoard.GetComponent<Board>().nodes[initPos + posCheck].GetComponent<Node>().occupied ||
                 edgeCaseWrap((shipLength - posCheck), (initPos + posCheck), 9))
                 return false;
         }
@@ -137,7 +182,7 @@ public class AI : MonoBehaviour {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
             if ((initPos - 10*posCheck) < 0 || 
-                AIBoard.GetComponent<Board>().nodes[initPos - 10*posCheck].GetComponent<Node>().state)
+                AIBoard.GetComponent<Board>().nodes[initPos - 10*posCheck].GetComponent<Node>().occupied)
                 return false;
         }
         return true;
@@ -148,7 +193,7 @@ public class AI : MonoBehaviour {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
             if ((initPos + 10*posCheck) > 99 || 
-                AIBoard.GetComponent<Board>().nodes[initPos + 10*posCheck].GetComponent<Node>().state)
+                AIBoard.GetComponent<Board>().nodes[initPos + 10*posCheck].GetComponent<Node>().occupied)
                 return false;
         }
         return true;
@@ -167,8 +212,8 @@ public class AI : MonoBehaviour {
         while (true)
         {
             int coord = rng.Next(100);
-            bool hit = playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
-            bool miss = !playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
+            bool hit = playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
+            bool miss = !playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
             Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
             if (hit)

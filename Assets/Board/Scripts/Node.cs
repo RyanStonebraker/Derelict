@@ -22,6 +22,7 @@ public class Node : MonoBehaviour
     public bool hit = false;
     public bool sunk = false;
     public bool miss = false;
+    public bool occupied = false;
     public string boardType = "";
 
     public void joinObject(Collider collision)
