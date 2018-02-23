@@ -38,7 +38,10 @@ public class Board : MonoBehaviour {
 
     public bool getNodeState(char row, int index)
     {
-        return get(row, index).GetComponent<Node>().state;
+        if (get(row, index).GetComponent<Node>().collidingObject)
+            return get(row, index).GetComponent<Node>().state && get(row, index).GetComponent<Node>().collidingObject.tag != "Ship";
+        else
+            return get(row, index).GetComponent<Node>().state;
     }
 
     public void setHit(char row, int index)
@@ -69,10 +72,17 @@ public class Board : MonoBehaviour {
     void OnTriggerEnter(Collider collision)
     {
         //row and index data are stored as part of object naming convention
-        char row = collision.gameObject.tag[3];
-        int index = collision.gameObject.name[6] - '0';
+        try
+        {
+            char row = collision.gameObject.tag[3];
+            int index = collision.gameObject.name[6] - '0';
 
-        replace(row, index, collision.gameObject);
+            replace(row, index, collision.gameObject);
+        }
+        catch
+        {
+            Debug.Log("*****FAILED to bind " + collision.gameObject + " to board, board full? (most likely)");
+        }
 
         //debug print format: "Row <char> node <#>"
         Debug.Log(collision.gameObject.tag + " " + collision.gameObject);

@@ -57,7 +57,7 @@ public class AI : MonoBehaviour {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
                         AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().state = true;
-                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                       // AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                 else
                     randomSpawnShip(shipLength);
@@ -68,7 +68,7 @@ public class AI : MonoBehaviour {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
                         AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().state = true;
-                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                 else
                     randomSpawnShip(shipLength);
@@ -79,7 +79,7 @@ public class AI : MonoBehaviour {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
                         AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().state = true;
-                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                 else
                     randomSpawnShip(shipLength);
@@ -90,7 +90,7 @@ public class AI : MonoBehaviour {
                     for (int shipPos = 0; shipPos < shipLength; shipPos++)
                     {
                         AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().state = true;
-                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                 else
                     randomSpawnShip(shipLength);
@@ -174,14 +174,15 @@ public class AI : MonoBehaviour {
             if (hit)
             {
                 playerNodes[coord].GetComponent<Node>().hit = true;
-                playerNodes[coord].GetComponent<Node>().setNodeToHitState();
+                //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
                 playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI LANDED A HIT!");
                 break;
             }
             else if(miss)
             {
-                playerNodes[coord].GetComponent<Node>().setNodeToMissState();
+                //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
+                playerNodes[coord].GetComponent<Node>().miss = true;
                 playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI MISSED!");
                 break;
@@ -200,16 +201,13 @@ public class AI : MonoBehaviour {
             generateNextShot();
         }
 
-        if (currentShot)
+        if (currentShot.GetComponent<ShotPiece>().attachedToNode && !stopCheck)
         {
-            if (currentShot.GetComponent<ShotPiece>().attachedToNode && !stopCheck)
-            {
-                stopCheck = true;
-                fireAtPlayer();
-                Debug.Log("Fired at player");
-                Wait(1, () => { generateNextShot(); });
-                Debug.Log("Spawned next shot");
-            }
+            stopCheck = true;
+            fireAtPlayer();
+            Debug.Log("Fired at player");
+            Wait(1, () => { generateNextShot(); });
+            Debug.Log("Spawned next shot");
         }
     }
 }

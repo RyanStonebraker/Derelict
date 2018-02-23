@@ -11,18 +11,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour
+{
 
     public bool state = false;
     public GameObject shipPart = null;
-    public GameObject collidingObject;
+    public GameObject collidingObject = null;
     public int jointBreakForce = 1000;
     public int jointTorqueBreakForce = 1000;
     public bool hit = false;
     public bool sunk = false;
     public bool miss = false;
     public string boardType = "";
-	
+
     public void joinObject(Collider collision)
     {
         collision.gameObject.transform.parent = gameObject.transform;
@@ -39,8 +40,8 @@ public class Node : MonoBehaviour {
 
         if (collidingObject.tag == "Shot")
         {
-            joint.breakForce = jointBreakForce * 1000;
-            joint.breakTorque = jointTorqueBreakForce * 1000;
+            joint.breakForce = uint.MaxValue;
+            joint.breakTorque = uint.MaxValue;
         }
 
         return joint;
@@ -56,7 +57,7 @@ public class Node : MonoBehaviour {
 
     private void snap()
     {
-        collidingObject.transform.position = gameObject.transform.position + new Vector3 (0,0,0.5f);
+        collidingObject.transform.position = gameObject.transform.position + new Vector3(0, 0, 0.5f);
         collidingObject.transform.rotation = gameObject.transform.rotation;
     }
 
@@ -79,7 +80,8 @@ public class Node : MonoBehaviour {
 
     private void addNodeToBattleshipCollisionList(Collider collision)
     {
-        collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
+        if (collision.gameObject.tag == "Ship")
+            collision.gameObject.GetComponent<GeneralObject>().currentCollisions.Add(gameObject);
     }
 
     private bool nodeNotJoinedWithBattleshipPiece()
@@ -87,7 +89,7 @@ public class Node : MonoBehaviour {
         return gameObject.GetComponent<FixedJoint>() == null;
     }
 
-    void OnTriggerEnter (Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
 
@@ -98,7 +100,7 @@ public class Node : MonoBehaviour {
             boardType = collision.gameObject.name;
 
         addNodeToBattleshipCollisionList(collision);
-        
+
         if (collisionIsWithBattleshipPiece(collision))
         {
             Debug.Log("Impact with " + collision.gameObject);
@@ -114,7 +116,7 @@ public class Node : MonoBehaviour {
             {
                 Debug.Log("Error in joint connection when object entered collider");
             }
-            
+
         }
     }
 
@@ -141,8 +143,11 @@ public class Node : MonoBehaviour {
 
     private void killJoint()
     {
-        GetComponent<FixedJoint>().connectedBody = null;
-        Destroy(GetComponent<FixedJoint>());
+        if (GetComponent<FixedJoint>())
+        {
+            GetComponent<FixedJoint>().connectedBody = null;
+            Destroy(GetComponent<FixedJoint>());
+        }
     }
 
     private void resetColoring()
@@ -169,14 +174,27 @@ public class Node : MonoBehaviour {
     void OnTriggerExit(Collider collision)
     {
         removeReferenceToCollidedObject(collision);
-        resetBattleshipCollisionsList(collision);
+        try
+        {
+            resetBattleshipCollisionsList(collision);
+        }
+        catch
+        {
+            Debug.Log(collision.gameObject + "was not a battleship piece");
+        }
         killJoint();
 
         // make the node turn green when the battleship piece exits
+        if (collision.gameObject.tag != "Controller")
+        {
+            miss = false;
 
-        miss = false;
-        collidingObject = null;
-        resetColoring();
+            if (boardType != "PlayerBoardAI")
+            {
+                collidingObject = null;
+                resetColoring();
+            }
+        }
     }
 
     //color the node blue and set the node as occupied with battleship piece
@@ -212,7 +230,15 @@ public class Node : MonoBehaviour {
 
     private bool theShotWasAMiss()
     {
-        return (!hit && (collidingObject.tag == "Finish"));
+        //try
+        //{
+        return !hit && (collidingObject.tag == "Shot");
+          
+        //}
+        //catch
+        //{
+        //    return false;
+        //}
     }
 
     public void colorNodes()
@@ -224,28 +250,27 @@ public class Node : MonoBehaviour {
         }
 
         if (collidingObject)
-        {
             state = true;
 
-            if (boardType == "PlacementBoard")
-            {
-                if (collidingObject)
-                    setNodeToOccupiedState();
-                else
-                    setNodeToDefaultState();
-            }
-            else if (boardType == "PlayerBoardAI")
-            {
-                if (theShotWasAMiss())
-                    setNodeToMissState();
-                else if (sunk)
-                    setNodeToSunkState();
-                else if (hit)
-                    setNodeToHitState();
-                else
-                    setNodeToDefaultState();
-            }
+        if (boardType == "PlacementBoard")
+        {
+            if (collidingObject)
+                setNodeToOccupiedState();
+            else
+                setNodeToDefaultState();
         }
+        else if (boardType == "PlayerBoardAI" && collidingObject)
+        {
+            if (hit)
+                setNodeToHitState();
+            else if (theShotWasAMiss())
+                setNodeToMissState();
+            else if (sunk)
+                setNodeToSunkState();
+            else
+                setNodeToDefaultState();
+        }
+        
     }
 
     private void colorShot()
@@ -264,10 +289,11 @@ public class Node : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-            if (collidingObject && collidingObject.tag == "Shot")
-                colorShot();
-            else
-                colorNodes();
-	}
+    void Update()
+    {
+        if (collidingObject && collidingObject.tag == "Shot")
+            colorShot();
+        else
+            colorNodes();
+    }
 }

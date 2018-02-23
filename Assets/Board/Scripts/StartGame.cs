@@ -15,28 +15,37 @@ public class StartGame : MonoBehaviour {
     private void findShips()
     {
         submarine = GameObject.Find("Submarine");
-        battleship = GameObject.Find("Warship");
-        radarShip = GameObject.Find("");
-        cruiser = GameObject.Find("");
-        aircraftCarrier = GameObject.Find("");
+        battleship = GameObject.Find("Battleship");
+        radarShip = GameObject.Find("Landing Craft");
+        cruiser = GameObject.Find("Battleship");
+        aircraftCarrier = GameObject.Find("Aircraft Carrier");
     }
 
     private void lockShipsInPlace()
     {
         submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
         submarine.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        submarine.GetComponent<GeneralObject>().flag = false;
 
         battleship.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
         battleship.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        battleship.GetComponent<GeneralObject>().flag = false;
 
-        //radarShip.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
-        //radarShip.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
 
-        //cruiser.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
-        //cruiser.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
+        radarShip.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
+        radarShip.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        radarShip.GetComponent<GeneralObject>().flag = false;
 
-        //aircraftCarrier.GetComponent<GeneralObject>().breakForce = uint.MaxValue;
-        //aircraftCarrier.GetComponent<GeneralObject>().breakTorque = uint.MaxValue;
+
+        cruiser.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
+        cruiser.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        cruiser.GetComponent<GeneralObject>().flag = false;
+
+
+        aircraftCarrier.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakForce = uint.MaxValue;
+        aircraftCarrier.GetComponent<GeneralObject>().currentCollisions[0].GetComponent<FixedJoint>().breakTorque = uint.MaxValue;
+        aircraftCarrier.GetComponent<GeneralObject>().flag = false;
+
     }
 
     private void initGame()

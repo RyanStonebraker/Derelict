@@ -21,6 +21,7 @@ TagManager:
   - Fragment
   - Shot
   - Opponent
+  - Ship
   layers:
   - Default
   - TransparentFX
