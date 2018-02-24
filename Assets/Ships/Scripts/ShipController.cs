@@ -18,6 +18,8 @@ public class ShipController : MonoBehaviour {
 
 	private bool sunk = false;
 
+	private string originalName = "";
+
 	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
 
 	private Vector3 SeaBoardLocation;
@@ -45,6 +47,7 @@ public class ShipController : MonoBehaviour {
 		SeaBoardLocation = GameObject.Find(SeaboardName).GetComponent<Renderer>().bounds.center;
 
 		ship = Instantiate(ship, SeaBoardLocation + BoardSeparationAmount, transform.rotation) as GameObject;
+		originalName = ship.gameObject.name;
 		ship.gameObject.name = "Ship" + instanceCount.ToString();
 		shipPosCopy = ship.gameObject.transform.position;
 
@@ -60,9 +63,11 @@ public class ShipController : MonoBehaviour {
 			LifeSpots[i].Row = (int)pieceList[i].y;
 			LifeSpots[i].Col = (int)pieceList[i].z;
 		}
+		Debug.Log("SetShip was called for: " + originalName + " on " + SeaboardName);
 	}
 
 	public bool checkHit(GameObject BoardObject, int shipPiece) {
+		Debug.Log("Ship spot on " + originalName + " on " + SeaboardName + ": " + (char)('A' + LifeSpots[shipPiece].Row) + LifeSpots[shipPiece].Col + " was " + ((BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[shipPiece].Row), LifeSpots[shipPiece].Col)) ? "Hit" : "Not Hit"));
 		return BoardObject.GetComponent<Board>().getNodeState((char)('A' + LifeSpots[shipPiece].Row), LifeSpots[shipPiece].Col);
 	}
 
@@ -115,7 +120,11 @@ public class ShipController : MonoBehaviour {
 		if (BoardObject != null) {
 			for (int shipPiece = 0; shipPiece < LifeSpots.Length; ++shipPiece) {
 				if (LifeSpots[shipPiece].isDead == false && checkHit(BoardObject, shipPiece)) {
-					BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
+
+					// DEBUG
+					Debug.Log(originalName + " on " + SeaboardName + " was HIT!");
+
+					// BoardObject.GetComponent<Board>().toggleMiss(getRow(shipPiece), getCol(shipPiece));
 					LifeSpots[shipPiece].isDead = true;
 
 					BoardObject.GetComponent<Board>().setHit(getRow(shipPiece), getCol(shipPiece));
@@ -162,7 +171,7 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void hideShip () {
-		ship.transform.position = new Vector3(0, 0, 0);
+		ship.transform.position = new Vector3(-1000, -1000, -1000);
 	}
 
 	private bool isColumnAligned () {
@@ -192,6 +201,10 @@ public class ShipController : MonoBehaviour {
 		}
 	}
 
+	public void unHideShip () {
+		ship.gameObject.transform.localScale = new Vector3(1,1,1);
+	}
+
 	public void Update () {
 		if (!sunk) {
 			UpdateShip();
@@ -199,8 +212,9 @@ public class ShipController : MonoBehaviour {
 			if (LifeSpots[0].Row == 0 && LifeSpots[0].Col == 0 && LifeSpots[1].Row == 0 && LifeSpots[1].Col == 0) {
 				hideShip();
 			}
-			else
+			else {
 				placeShipOnWaterGrid();
+			}
 
 			setShipRotation();
 		}

@@ -17,7 +17,7 @@ public class StartGame : MonoBehaviour {
         submarine = GameObject.Find("Submarine");
         battleship = GameObject.Find("Battleship");
         radarShip = GameObject.Find("Landing Craft");
-        cruiser = GameObject.Find("Battleship");
+        cruiser = GameObject.Find("Warship");
         aircraftCarrier = GameObject.Find("Aircraft Carrier");
     }
 
@@ -60,9 +60,9 @@ public class StartGame : MonoBehaviour {
         initGame();
         editMode = false;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }

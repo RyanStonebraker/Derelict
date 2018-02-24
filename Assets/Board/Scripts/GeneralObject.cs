@@ -70,7 +70,7 @@ public class GeneralObject : MonoBehaviour {
         if(currentCollisions.Count == shipSize && shipConstructor.Count < shipSize)
             populate();
 
-        if (shipConstructor.Count == shipSize && flag)
-            spawnShipOnMainScene();   
+        if (flag && shipConstructor.Count == shipSize)
+            spawnShipOnMainScene();
     }
 }

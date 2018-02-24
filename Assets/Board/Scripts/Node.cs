@@ -234,7 +234,7 @@ public class Node : MonoBehaviour
         //try
         //{
         return !hit && (collidingObject.tag == "Shot");
-          
+
         //}
         //catch
         //{
@@ -251,7 +251,7 @@ public class Node : MonoBehaviour
         }
 
         if (collidingObject)
-            state = true;
+            occupied = true;
 
         if (boardType == "PlacementBoard")
         {
@@ -262,25 +262,27 @@ public class Node : MonoBehaviour
         }
         else if (boardType == "PlayerBoardAI" && collidingObject)
         {
-            if (hit)
+            if (sunk)
+              setNodeToSunkState();
+            else if (hit)
                 setNodeToHitState();
             else if (theShotWasAMiss())
                 setNodeToMissState();
-            else if (sunk)
-                setNodeToSunkState();
             else
                 setNodeToDefaultState();
         }
-        
+
     }
 
     private void colorShot()
     {
         Debug.Log("Inside colorShot");
         state = true;
-        if (occupied)
+        if (sunk) {
+          setNodeToSunkState();
+        }
+        else if (occupied)
         {
-            hit = true;
             setNodeToHitState();
         }
         else
@@ -292,6 +294,8 @@ public class Node : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      if (hit)
+        setNodeToHitState();
         if (collidingObject && collidingObject.tag == "Shot")
             colorShot();
         else

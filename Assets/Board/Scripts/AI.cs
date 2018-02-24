@@ -157,8 +157,8 @@ public class AI : MonoBehaviour {
     {
         for(int posCheck = 0; posCheck < shipLength; posCheck++)
         {
-            if ((initPos - posCheck) < 0 || 
-                AIBoard.GetComponent<Board>().nodes[initPos - posCheck].GetComponent<Node>().occupied || 
+            if ((initPos - posCheck) < 0 ||
+                AIBoard.GetComponent<Board>().nodes[initPos - posCheck].GetComponent<Node>().occupied ||
                 edgeCaseWrap((shipLength-posCheck),(initPos-posCheck),0))
                 return false;
         }
@@ -169,7 +169,7 @@ public class AI : MonoBehaviour {
     {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
-            if ((initPos + posCheck) > 99 || 
+            if ((initPos + posCheck) > 99 ||
                 AIBoard.GetComponent<Board>().nodes[initPos + posCheck].GetComponent<Node>().occupied ||
                 edgeCaseWrap((shipLength - posCheck), (initPos + posCheck), 9))
                 return false;
@@ -181,7 +181,7 @@ public class AI : MonoBehaviour {
     {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
-            if ((initPos - 10*posCheck) < 0 || 
+            if ((initPos - 10*posCheck) < 0 ||
                 AIBoard.GetComponent<Board>().nodes[initPos - 10*posCheck].GetComponent<Node>().occupied)
                 return false;
         }
@@ -192,7 +192,7 @@ public class AI : MonoBehaviour {
     {
         for (int posCheck = 0; posCheck < shipLength; posCheck++)
         {
-            if ((initPos + 10*posCheck) > 99 || 
+            if ((initPos + 10*posCheck) > 99 ||
                 AIBoard.GetComponent<Board>().nodes[initPos + 10*posCheck].GetComponent<Node>().occupied)
                 return false;
         }
@@ -218,7 +218,7 @@ public class AI : MonoBehaviour {
 
             if (hit)
             {
-                playerNodes[coord].GetComponent<Node>().hit = true;
+                // playerNodes[coord].GetComponent<Node>().state = true;
                 //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
                 playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI LANDED A HIT!");
@@ -227,7 +227,7 @@ public class AI : MonoBehaviour {
             else if(miss)
             {
                 //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
-                playerNodes[coord].GetComponent<Node>().miss = true;
+                // playerNodes[coord].GetComponent<Node>().state = true;
                 playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI MISSED!");
                 break;

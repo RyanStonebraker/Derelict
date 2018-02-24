@@ -4014,6 +4014,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4618087287266198}
+  - component: {fileID: 54055886228268958}
   m_Layer: 0
   m_Name: Landing Craft
   m_TagString: Untagged
@@ -5834,7 +5835,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198606255289480}
-  m_LocalRotation: {x: 0.009871857, y: -0.7070379, z: -0.7070378, w: 0.009871875}
+  m_LocalRotation: {x: 0.009871858, y: -0.707038, z: -0.70703787, w: 0.009871876}
   m_LocalPosition: {x: 50.528053, y: -3.875641, z: -0.61972046}
   m_LocalScale: {x: 0.03250003, y: 0.03250003, z: 0.03250003}
   m_Children:
@@ -18111,3 +18112,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370744460309252}
   m_Mesh: {fileID: 4300060, guid: 1a73007e379d244fd8f327c94c64b028, type: 3}
+--- !u!54 &54055886228268958
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933865538784820}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

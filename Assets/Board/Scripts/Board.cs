@@ -6,7 +6,7 @@
 // Acts as a wrapper class around node.cs, board can interact directly with
 // node states and track which objects are in each node. On gamestart, a List
 // (nodes) is populated with all nodes in contact with the board. This list can
-// be viewed within unity during runtime to see board state updates at runtime. 
+// be viewed within unity during runtime to see board state updates at runtime.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -43,44 +43,52 @@ public class Board : MonoBehaviour {
         nodes[(row - 'A') * 10 + index] = item;
     }
 
-    public GameObject get(char row, int index)
+    public GameObject retrieveNode(char row, int index)
     {
         return nodes[(row - 'A') * 10 + index];
     }
 
     public bool getNodeState(char row, int index)
     {
-        if (get(row, index).GetComponent<Node>().collidingObject)
-            return get(row, index).GetComponent<Node>().state && get(row, index).GetComponent<Node>().collidingObject.tag != "Ship";
-        else
-            return get(row, index).GetComponent<Node>().state;
+        // if (retrieveNode(row, index).GetComponent<Node>().collidingObject)
+        //     return retrieveNode(row, index).GetComponent<Node>().state && retrieveNode(row, index).GetComponent<Node>().collidingObject.tag != "Ship";
+        // else
+
+        if(!retrieveNode(row, index).GetComponent<Node>().collidingObject)
+          return false;
+        
+            if(retrieveNode(row, index).GetComponent<Node>().collidingObject.tag == "Shot")
+                Debug.Log("IM A BANANA");
+
+            Debug.Log("Node state for: " + row + index + " is " + retrieveNode(row, index).GetComponent<Node>().state);
+            return retrieveNode(row, index).GetComponent<Node>().state;
     }
 
     public void setHit(char row, int index)
     {
-        get(row, index).GetComponent<Node>().hit = true;
+        retrieveNode(row, index).GetComponent<Node>().hit = true;
     }
 
     public void setSunk(char row, int index)
     {
-        get(row, index).GetComponent<Node>().sunk = true;
+        retrieveNode(row, index).GetComponent<Node>().sunk = true;
     }
 
     public void toggleMiss(char row, int index)
     {
-        get(row, index).GetComponent<Node>().miss = !get(row, index).GetComponent<Node>().miss;
+        retrieveNode(row, index).GetComponent<Node>().miss = !retrieveNode(row, index).GetComponent<Node>().miss;
     }
 
     public void setNodeState(char row, int index, bool state)
     {
-        get(row, index).GetComponent<Node>().state = state;
+        retrieveNode(row, index).GetComponent<Node>().state = state;
     }
 
     public void setShipPart(char row, int index, GameObject shipPart)
     {
-        get(row, index).GetComponent<Node>().shipPart = shipPart;
+        retrieveNode(row, index).GetComponent<Node>().shipPart = shipPart;
     }
-    
+
     void OnTriggerEnter(Collider collision)
     {
         //row and index data are stored as part of object naming convention
