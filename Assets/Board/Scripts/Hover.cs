@@ -5,15 +5,17 @@ using UnityEngine;
 public class Hover : MonoBehaviour {
 
     public float hoverStrength = 14f;
+    public bool checkShips = true;
+    public bool checkShots = true;
 
     private bool aShotCollided(Collider collision)
     {
-        return collision.gameObject.tag == "Shot";
+        return collision.gameObject.tag == "Shot" && checkShots;
     }
 
     private bool aShipPieceCollided(Collider collision)
     {
-        return collision.gameObject.tag == "Ship";
+        return collision.gameObject.tag == "Ship" && checkShips;
     }
 
     void OnTriggerEnter(Collider collision)
