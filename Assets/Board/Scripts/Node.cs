@@ -250,8 +250,8 @@ public class Node : MonoBehaviour
             Instantiate(shipPart, transform.position, transform.rotation);
         }
 
-        if (collidingObject)
-            occupied = true;
+        //if (collidingObject)
+        //    occupied = true;
 
         if (boardType == "PlacementBoard")
         {

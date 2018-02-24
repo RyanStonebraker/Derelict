@@ -86,7 +86,7 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void doEndExplosion () {
-		shootMissile();
+		// shootMissile();
 		Vector3 posSave = ship.transform.position;
 		posSave = new Vector3(posSave.x + Random.Range(-25, 25), posSave.y + Random.Range(50,125), posSave.z + Random.Range(-100,50));
 

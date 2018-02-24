@@ -61,7 +61,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -83,7 +83,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -105,7 +105,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -127,7 +127,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {

@@ -103,7 +103,7 @@ public class Grab : MonoBehaviour {
         // Note: object must be a rigidbody for joint to work
         var joint = addFixedJoint(); // (see function addFixedJoint below for physics properties)
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-        collidingObject.gameObject.transform.parent = gameObject.transform;
+        //collidingObject.gameObject.transform.parent = gameObject.transform;
     }
     
     // Add some physical features to joint, if the breakforces are
