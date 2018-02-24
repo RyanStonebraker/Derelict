@@ -218,17 +218,17 @@ public class AI : MonoBehaviour {
 
             if (hit)
             {
-                // playerNodes[coord].GetComponent<Node>().state = true;
+                playerNodes[coord].GetComponent<Node>().state = true;
                 //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
-                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+                // playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI LANDED A HIT!");
                 break;
             }
             else if(miss)
             {
                 //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
-                // playerNodes[coord].GetComponent<Node>().state = true;
-                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+                playerNodes[coord].GetComponent<Node>().state = true;
+                // playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
                 Debug.Log("AI MISSED!");
                 break;
             }
