@@ -47,7 +47,7 @@ public class Grab : MonoBehaviour {
         return objectInHand;
     }
 
-    // Collision detection - on function call, if the collider is within a grabable object, assign 
+    // Collision detection - on function call, if the collider is within a grabable object, assign
     // that object to a reference variable (collidingObject) for later use
     private void setCollidingObject(Collider col)
     {
@@ -103,9 +103,9 @@ public class Grab : MonoBehaviour {
         // Note: object must be a rigidbody for joint to work
         var joint = addFixedJoint(); // (see function addFixedJoint below for physics properties)
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
-        //collidingObject.gameObject.transform.parent = gameObject.transform;
+        collidingObject.gameObject.transform.parent = gameObject.transform;
     }
-    
+
     // Add some physical features to joint, if the breakforces are
     // exceeded, the joint is broken and the joined objects are decoupled
     private FixedJoint addFixedJoint()
