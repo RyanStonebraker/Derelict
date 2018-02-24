@@ -208,7 +208,7 @@ public class AI : MonoBehaviour {
     private void fireAtPlayer()
     {
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;
-
+        Debug.Log ("******************** FIRE AT TRISTAN. **************************");
         while (true)
         {
             int coord = rng.Next(100);

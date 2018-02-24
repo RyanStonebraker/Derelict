@@ -17,7 +17,6 @@ public class ShipController : MonoBehaviour {
 	public int ShipBlockHeight = 50;
 
 	private bool sunk = false;
-
 	private string originalName = "";
 
 	public Vector3 BoardSeparationAmount = new Vector3(300,0,600);
@@ -26,7 +25,7 @@ public class ShipController : MonoBehaviour {
 
 	static private int instanceCount = 0;
 
-    public string SeaboardName = "SeaBoard";
+  public string SeaboardName = "SeaBoard";
 
 	[System.Serializable]
 	public struct ShipPiece { public bool isDead; public int Row; public int Col;}
@@ -87,7 +86,7 @@ public class ShipController : MonoBehaviour {
 	}
 
 	public void doEndExplosion () {
-		// shootMissile();
+		shootMissile();
 		Vector3 posSave = ship.transform.position;
 		posSave = new Vector3(posSave.x + Random.Range(-25, 25), posSave.y + Random.Range(50,125), posSave.z + Random.Range(-100,50));
 
@@ -98,7 +97,7 @@ public class ShipController : MonoBehaviour {
 
 	public void shootMissile () {
 		Vector3 aboveShip = ship.transform.position;
-		aboveShip = new Vector3(aboveShip.x, aboveShip.y + 500, aboveShip.z);
+		aboveShip = new Vector3(aboveShip.x, aboveShip.y + 100, aboveShip.z);
 		missile = Instantiate(missile, aboveShip, transform.rotation) as GameObject;
 		missile.GetComponent<Rigidbody>().velocity = new Vector3(0, -100, 0);
 		// missile.GetComponent<Rigidbody>().velocity = new Vector3(missile.GetComponent<Rigidbody>().velocity.x, missile.GetComponent<Rigidbody>().velocity.y, missile.GetComponent<Rigidbody>().velocity.z + 10);
@@ -199,10 +198,6 @@ public class ShipController : MonoBehaviour {
 		else if (!rotationSet() && isRowAligned()) {
 			ship.transform.eulerAngles = new Vector3(0,0,0);
 		}
-	}
-
-	public void unHideShip () {
-		ship.gameObject.transform.localScale = new Vector3(1,1,1);
 	}
 
 	public void Update () {
