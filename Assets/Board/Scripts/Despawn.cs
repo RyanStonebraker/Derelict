@@ -5,6 +5,8 @@ using System;
 
 public class Despawn : MonoBehaviour {
 
+    public int DestroyTime = 3;
+
     public void Wait(float seconds, Action action)
     {
         StartCoroutine(_wait(seconds, action));
@@ -18,7 +20,7 @@ public class Despawn : MonoBehaviour {
 
     private void deleteFragments()
     {
-        Wait (3, () => { Destroy(gameObject); });  
+        Wait (DestroyTime, () => { Destroy(gameObject); });
     }
 
     //Enter the world and die in 3 seconds

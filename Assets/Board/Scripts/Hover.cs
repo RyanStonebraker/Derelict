@@ -7,6 +7,7 @@ public class Hover : MonoBehaviour {
     public float hoverStrength = 14f;
     public bool checkShips = true;
     public bool checkShots = true;
+    public bool hoverAll = false;
 
     private bool aShotCollided(Collider collision)
     {
@@ -20,20 +21,20 @@ public class Hover : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
-        if(aShotCollided(collision) || aShipPieceCollided(collision))
+        if(aShotCollided(collision) || aShipPieceCollided(collision) || hoverAll)
             collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * hoverStrength, ForceMode.Force); //.up is short for (0,1,0)
     }
 
     void OnTriggerStay(Collider collision)
     {
-        if (aShotCollided(collision) || aShipPieceCollided(collision))
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * hoverStrength, ForceMode.Force); 
+        if (aShotCollided(collision) || aShipPieceCollided(collision) || hoverAll)
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * hoverStrength, ForceMode.Force);
     }
 
     void OnTriggerExit(Collider collision)
     {
         //might use this for some effects later
-        //if (aShotCollided(collision) || aShipPieceCollided(collision)) 
+        //if (aShotCollided(collision) || aShipPieceCollided(collision))
         //    collision.gameObject.GetComponent<Rigidbody>().AddTorque(Vector3.up * 10f, ForceMode.Force);
     }
 }

@@ -76,7 +76,8 @@ public class Node : MonoBehaviour
            && collision.gameObject.tag != "RowI"
            && collision.gameObject.tag != "RowJ"
            && collision.gameObject.tag != "Controller"
-           && collision.gameObject.tag != "Fragment";
+           && collision.gameObject.tag != "Fragment"
+           && collision.gameObject.name != "Phil The Pill";
     }
 
     private void addNodeToBattleshipCollisionList(Collider collision)
@@ -174,7 +175,7 @@ public class Node : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-      if (collision.gameObject.tag != "Controller")
+      if (collision.gameObject.tag != "Controller" && collision.gameObject.name != "Phil The Pill")
       {
         removeReferenceToCollidedObject(collision);
         try
