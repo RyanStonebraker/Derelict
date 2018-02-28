@@ -266,10 +266,35 @@ public class AI : MonoBehaviour {
 
         int coord = -1;
 
-        for (int i = 0; i < playerShips[currentPlayerShipIndex].LifeSpots.Count; ++i) {
-          // if spot not dead
-          if (playerShips[currentPlayerShipIndex].LifeSpots[i].x == 0) {
-            coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
+        bool shouldHitAShip = (UnityEngine.Random.Range(0,100) <= 100 * AIHitPercentange) ? true : false;
+
+        if (shouldHitAShip) {
+          for (int i = 0; i < playerShips[currentPlayerShipIndex].LifeSpots.Count; ++i) {
+            // if spot not dead
+            if (playerShips[currentPlayerShipIndex].LifeSpots[i].x == 0) {
+              coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
+            }
+          }
+        } else {
+          int tempRow = UnityEngine.Random.Range(0, 9);
+          int tempCol = UnityEngine.Random.Range(0, 9);
+          bool foundEmpty = false;
+          while (!foundEmpty) {
+            for (int i = 0; i < playerShips.Count; ++i) {
+              bool notEmpty = false;
+              for (int place = 0; place < playerShips[i].LifeSpots.Count; ++place) {
+                if (tempRow == playerShips[i].LifeSpots[place].y && tempCol == playerShips[i].LifeSpots[place].z) {
+                  notEmpty = true;
+                }
+                if (notEmpty)
+                  break;
+              }
+              if (!notEmpty) {
+                foundEmpty = true;
+              }
+            }
+            tempRow = UnityEngine.Random.Range(0, 9);
+            tempCol = UnityEngine.Random.Range(0, 9);
           }
         }
 
@@ -282,8 +307,8 @@ public class AI : MonoBehaviour {
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;
         Debug.Log ("******************** FIRE AT TRISTAN. **************************");
 
-        bool hit = playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
-        bool miss = !playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
+        bool hit = playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
+        bool miss = !playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
         Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
         if (hit)
