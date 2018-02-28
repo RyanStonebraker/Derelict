@@ -274,12 +274,12 @@ public class AI : MonoBehaviour {
           for (int i = 0; i < playerShips[currentPlayerShipIndex].LifeSpots.Count; ++i) {
             // if spot not dead
             if (playerShips[currentPlayerShipIndex].LifeSpots[i].x == 0) {
-
+              if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
+                atLastIndexOfShip = true;
+              }
               coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
               playerShips[currentPlayerShipIndex].LifeSpots[i] = new Vector3(1, playerShips[currentPlayerShipIndex].LifeSpots[i].y, playerShips[currentPlayerShipIndex].LifeSpots[i].z);
-            }
-            if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
-              atLastIndexOfShip = true;
+              break;
             }
           }
         } else {
