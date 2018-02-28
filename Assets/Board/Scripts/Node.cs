@@ -131,7 +131,7 @@ public class Node : MonoBehaviour
                 {
                     setCollidingObject(collision);
                     joinObject(collision);
-                    occupied = true;
+                    miss = true;
                     //snap(); //Work in progress
                 }
             }

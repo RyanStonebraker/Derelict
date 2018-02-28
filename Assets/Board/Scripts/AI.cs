@@ -307,26 +307,26 @@ public class AI : MonoBehaviour {
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;
         Debug.Log ("******************** FIRE AT TRISTAN. **************************");
 
-        bool hit = playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
-        bool miss = !playerNodes[coord].GetComponent<Node>().state && !playerNodes[coord].GetComponent<Node>().miss;
+        // bool hit = playerNodes[coord].GetComponent<Node>().hit;
+        // bool miss = !playerNodes[coord].GetComponent<Node>().hit;
         Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
-        if (hit)
-        {
+        // if (hit)
+        // {
             playerNodes[coord].GetComponent<Node>().state = true;
             playerNodes[coord].GetComponent<Node>().occupied = true;
             //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
             playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
             Debug.Log("AI LANDED A HIT!");
-        }
-        else if(miss)
-        {
-            //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
-            playerNodes[coord].GetComponent<Node>().state = true;
-            // playerNodes[coord].GetComponent<Node>().occupied = true;
-            playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
-            Debug.Log("AI MISSED!");
-        }
+        // }
+        // else if(miss)
+        // {
+        //     //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
+        //     playerNodes[coord].GetComponent<Node>().state = true;
+        //     // playerNodes[coord].GetComponent<Node>().occupied = true;
+        //     playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+        //     Debug.Log("AI MISSED!");
+        // }
 
     }
 
