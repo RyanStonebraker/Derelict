@@ -22,6 +22,7 @@ TagManager:
   - Shot
   - Opponent
   - Ship
+  - Phil The Phil
   layers:
   - Default
   - TransparentFX

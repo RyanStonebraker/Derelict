@@ -77,7 +77,9 @@ public class Node : MonoBehaviour
            && collision.gameObject.tag != "RowJ"
            && collision.gameObject.tag != "Controller"
            && collision.gameObject.tag != "Fragment"
-           && collision.gameObject.name != "Phil The Pill";
+           && collision.gameObject.tag != "Phil The Phil"
+           && collision.gameObject.name != "Chunk"
+           && collision.gameObject.name != "Chunk(Clone)";
     }
 
     private void addNodeToBattleshipCollisionList(Collider collision)
@@ -95,8 +97,12 @@ public class Node : MonoBehaviour
     {
         Debug.Log("Impact with " + collision.gameObject.tag);
 
-        if (collision.gameObject.tag == "Shot")
+        //if (collidingObject && collidingObject.tag == "Shot")
+        //    return;
+
+        if (collision.gameObject.tag == "Shot") { 
             collision.gameObject.GetComponent<ShotPiece>().attachedToNode = true;
+        }   
 
         if (boardType == "" && collision.gameObject.tag == "Board")
             boardType = collision.gameObject.name;
@@ -124,6 +130,14 @@ public class Node : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
+        //if (collidingObject && collidingObject.tag == "Shot")
+        //    return;
+
+        if (collision.gameObject.tag == "Shot")
+        {
+            collision.gameObject.GetComponent<ShotPiece>().attachedToNode = true;
+        }
+
         if (collisionIsWithBattleshipPiece(collision))
         {
             try
@@ -175,7 +189,7 @@ public class Node : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
-      if (collision.gameObject.tag != "Controller" && collision.gameObject.name != "Phil The Pill")
+      if (collisionIsWithBattleshipPiece(collision))
       {
         removeReferenceToCollidedObject(collision);
         try

@@ -91,26 +91,24 @@ public class Board : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
-        //row and index data are stored as part of object naming convention
-        try
+        if (collision.gameObject.name.Contains("Node"))
         {
-            char row = collision.gameObject.tag[3];
-            int index = collision.gameObject.name[6] - '0';
+            //row and index data are stored as part of object naming convention
+            try
+            {
+                char row = collision.gameObject.tag[3];
+                int index = collision.gameObject.name[6] - '0';
 
-            replace(row, index, collision.gameObject);
+                replace(row, index, collision.gameObject);
+            }
+            catch
+            {
+                Debug.Log("*****FAILED to bind " + collision.gameObject + " to board, board full? (most likely)");
+            }
         }
-        catch
-        {
-            Debug.Log("*****FAILED to bind " + collision.gameObject + " to board, board full? (most likely)");
-        }
-
         //debug print format: "Row <char> node <#>"
         Debug.Log(collision.gameObject.tag + " " + collision.gameObject);
     }
 
-    void OnTriggerStay(Collider collision)
-    {
-        //Proto
-    }
 
 }

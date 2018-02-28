@@ -65,10 +65,10 @@ public class Grab : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         setCollidingObject(other);
-        if(other.gameObject.tag == "Respawn")
-        {
-            other.gameObject.GetComponent<GeneralObject>().collidingObject = gameObject;
-        }
+        //if(other.gameObject.tag == "Respawn")
+        //{
+        //    other.gameObject.GetComponent<GeneralObject>().collidingObject = gameObject;
+        //}
     }
 
     // Fixes a bug where if the trigger is held on a collidable game object

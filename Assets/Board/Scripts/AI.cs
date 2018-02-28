@@ -14,6 +14,7 @@ public class AI : MonoBehaviour {
     public struct ShipContainer {public List<Vector3> LifeSpots; public string ShipName;}
 
     public List<ShipContainer> playerShips;
+    private List<ShipContainer> playerShipsThatCouldBeDead;
     public int currentPlayerShipIndex = -1;
     public double AIHitPercentange = 0.8;
     private int existingShipLocation = -1;
@@ -41,12 +42,14 @@ public class AI : MonoBehaviour {
         ShipContainer existShip = playerShips[getExistingShipLocation()];
         existShip.LifeSpots = shipLifeSpots;
         existShip.ShipName = shipName;
+        playerShipsThatCouldBeDead = playerShips;
         return;
       }
       ShipContainer tempShip;
       tempShip.LifeSpots = shipLifeSpots;
       tempShip.ShipName = shipName;
       playerShips.Add(tempShip);
+      playerShipsThatCouldBeDead = playerShips;
     }
 
     void chooseRandomIndex() {
@@ -286,13 +289,13 @@ public class AI : MonoBehaviour {
           int tempRow = UnityEngine.Random.Range(0, 10);
           int tempCol = UnityEngine.Random.Range(0, 10);
           bool foundEmpty = false;
-          for (int j = 0; j < 100; ++j) {
+          for (int j = 0; j < 500; ++j) {
             if (foundEmpty)
               break;
-            for (int i = 0; i < playerShips.Count; ++i) {
+            for (int i = 0; i < playerShipsThatCouldBeDead.Count; ++i) {
               bool notEmpty = false;
-              for (int place = 0; place < playerShips[i].LifeSpots.Count; ++place) {
-                if (tempRow == playerShips[i].LifeSpots[place].y && tempCol == playerShips[i].LifeSpots[place].z) {
+              for (int place = 0; place < playerShipsThatCouldBeDead[i].LifeSpots.Count; ++place) {
+                if (tempRow == playerShipsThatCouldBeDead[i].LifeSpots[place].y && tempCol == playerShipsThatCouldBeDead[i].LifeSpots[place].z) {
                   notEmpty = true;
                 }
                 if (notEmpty)
@@ -302,8 +305,8 @@ public class AI : MonoBehaviour {
                 foundEmpty = true;
               }
             }
-            tempRow = UnityEngine.Random.Range(0, 9);
-            tempCol = UnityEngine.Random.Range(0, 9);
+            tempRow = UnityEngine.Random.Range(0, 10);
+            tempCol = UnityEngine.Random.Range(0, 10);
           }
 
           coord = getCoord(tempRow, tempCol);
@@ -312,6 +315,7 @@ public class AI : MonoBehaviour {
 
         if (coord == -1 || coord >= 100) {
           Debug.Log("You should not have gotten here... Leaving..");
+            fireAtPlayer();
           return;
         }
 
