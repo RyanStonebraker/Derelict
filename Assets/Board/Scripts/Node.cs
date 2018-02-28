@@ -174,6 +174,8 @@ public class Node : MonoBehaviour
 
     void OnTriggerExit(Collider collision)
     {
+      if (collision.gameObject.tag != "Controller")
+      {
         removeReferenceToCollidedObject(collision);
         try
         {
@@ -186,8 +188,7 @@ public class Node : MonoBehaviour
         killJoint();
 
         // make the node turn green when the battleship piece exits
-        if (collision.gameObject.tag != "Controller")
-        {
+
             miss = false;
 
             if (boardType != "PlayerBoardAI")
