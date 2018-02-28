@@ -313,11 +313,18 @@ public class AI : MonoBehaviour {
 
         // if (hit)
         // {
+        if (shouldHitAShip) {
             playerNodes[coord].GetComponent<Node>().state = true;
             playerNodes[coord].GetComponent<Node>().occupied = true;
+            Debug.Log("AI Hit Coord: " + coord);
+          }
+          else {
+            playerNodes[coord].GetComponent<Node>().miss = true;
+            playerNodes[coord].GetComponent<Node>().hit = false;
+            Debug.Log("AI missed Coord: " + coord);  
+          }
             //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
             playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
-            Debug.Log("AI LANDED A HIT!");
         // }
         // else if(miss)
         // {
