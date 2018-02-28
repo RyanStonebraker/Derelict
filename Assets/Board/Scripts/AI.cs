@@ -285,7 +285,7 @@ public class AI : MonoBehaviour {
           int tempRow = UnityEngine.Random.Range(0, 10);
           int tempCol = UnityEngine.Random.Range(0, 10);
           bool foundEmpty = false;
-          for (int i = 0; i < 100; ++i) {
+          for (int j = 0; j < 100; ++j) {
             if (foundEmpty)
               break;
             for (int i = 0; i < playerShips.Count; ++i) {
