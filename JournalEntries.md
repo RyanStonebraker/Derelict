@@ -17,6 +17,12 @@
 | 2/12/2018 - 1:42pm | Fully working Alpha build. Two boards exist that allow you to drop ships on one (creator mode) and attack on the other (game play mode). The only thing left now is to build simple AI player and possible due epics of adding a web based controller. |
 | 2/18/2018 - 9:41pm | Refactored the ship controller class to make it more readable. Also added another ship to the main testing scene. |
 | 2/19/2018 - 2:56am | Finished creating a demo video showing off the development on Derelict. Also, collaborated on filling out the README file to have in depth documentation of testing procedures, set up, dependencies, and acknowledgements. |
+| 2/23/2018 - 6:34pm | Fixed some bugs associated with SeaBoard drawing and worked on various boolean related bug fixes. |
+| 2/24/2018 - 12:47am | Worked on setting up the scene for a demo with full game play. Also added some objects to scene for visual appeal.|
+| 2/24/2018 - 11:56am | Made a CEM_DEMO branch to show off at the CEM open house. This build included placing ships back on board for the game to go faster. There is still an issue with a shader preventing building. |
+| 2/27/2018 - 6:23pm | Implemented an AI that "knows" where every one of the player's pieces are and hits them a specified percentage of the time instead of randomly guessing. |
+| 2/27/2018 - 8:49pm | Fixed some simple bugs with the new AI and went to Chapman to test room setup before presentation. |
+| 2/28/2018 - 2:38pm | Got AI (we think?) fully working and fixed several coloring issues associated with it incorrectly choosing miss shots. Also did some strength testing and filtered out unknown objects connecting to nodes on the board. Made a final build that will be used for the demo. |
 
 
 
