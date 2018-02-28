@@ -275,6 +275,10 @@ public class AI : MonoBehaviour {
               coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
               playerShips[currentPlayerShipIndex].LifeSpots[i] = new Vector3(1, playerShips[currentPlayerShipIndex].LifeSpots[i].y, playerShips[currentPlayerShipIndex].LifeSpots[i].z);
             }
+            if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
+              removeCurrentShip();
+              chooseRandomIndex();
+            }
           }
         } else {
           int tempRow = UnityEngine.Random.Range(0, 9);
@@ -297,12 +301,6 @@ public class AI : MonoBehaviour {
             tempRow = UnityEngine.Random.Range(0, 9);
             tempCol = UnityEngine.Random.Range(0, 9);
           }
-        }
-
-        if (coord == -1 && playerShips.Count > 0) {
-          removeCurrentShip();
-          fireAtPlayer();
-          return;
         }
 
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;

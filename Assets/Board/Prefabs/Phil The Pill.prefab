@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 23474482771986614}
   - component: {fileID: 54498847586980796}
   - component: {fileID: 114754021200386226}
-  - component: {fileID: 114135088745159456}
   m_Layer: 0
   m_Name: Phil The Pill
   m_TagString: Finish
@@ -101,17 +100,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &114135088745159456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268077295610202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9f7280f5043c94fbe2a3e93212f57d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114754021200386226
 MonoBehaviour:
   m_ObjectHideFlags: 1
