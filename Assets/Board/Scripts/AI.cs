@@ -11,7 +11,7 @@ public class AI : MonoBehaviour {
     public GameObject currentShot = null;
 
     [System.Serializable]
-    public struct ShipContainer {public Vector3 [] LifeSpots; public string ShipName;}
+    public struct ShipContainer {public List<Vector3> LifeSpots; public string ShipName;}
 
     public List<ShipContainer> playerShips;
     public int currentPlayerShipIndex = -1;
@@ -19,8 +19,6 @@ public class AI : MonoBehaviour {
     private int existingShipLocation = -1;
 
     public bool stopCheck = false;
-
-    System.Random rng = new System.Random();
 
     private bool ShipAlreadyExists(string shipName) {
       for (int i = 0; i < playerShips.Count; ++i) {
@@ -38,17 +36,26 @@ public class AI : MonoBehaviour {
       return existingShipLocation;
     }
 
-
-    public void addPlayerShip(Vector3 [] shipLifeSpots, string shipName) {
+    public void addPlayerShip(List<Vector3> shipLifeSpots, string shipName) {
       if (ShipAlreadyExists(shipName)) {
-        LifeSpots[getExistingShipLocation()].LifeSpots = shipLifeSpots;
-        LifeSpots[getExistingShipLocation()].ShipName = shipName;
+        ShipContainer existShip = playerShips[getExistingShipLocation()];
+        existShip.LifeSpots = shipLifeSpots;
+        existShip.ShipName = shipName;
         return;
       }
       ShipContainer tempShip;
       tempShip.LifeSpots = shipLifeSpots;
       tempShip.ShipName = shipName;
       playerShips.Add(tempShip);
+    }
+
+    void chooseRandomIndex() {
+      currentPlayerShipIndex = UnityEngine.Random.Range(0, playerShips.Count - 1);
+    }
+
+    void removeCurrentShip() {
+      if (currentPlayerShipIndex >= 0 && currentPlayerShipIndex < playerShips.Count)
+        playerShips.RemoveAt(currentPlayerShipIndex);
     }
 
     public void Wait(float seconds, Action action)
@@ -68,11 +75,11 @@ public class AI : MonoBehaviour {
         AIBoard = GameObject.Find("PlayerBoardAI");
     }
 
-    //Aircraft = 5
-    //Battleship = 4
-    //Cruiser = 3
-    //Submarine = 3
-    //RadarShip = 2
+    // Aircraft = 5
+    // Battleship = 4
+    // Cruiser = 3
+    // Submarine = 3
+    // RadarShip = 2
     private void setAIShips()
     {
         randomSpawnShip(5,"AircraftCarrierEnemy");
@@ -84,8 +91,8 @@ public class AI : MonoBehaviour {
 
     private void randomSpawnShip(int shipLength, string shipName)
     {
-        int initPosition = rng.Next(100);
-        int rotation = rng.Next(4);
+        int initPosition = UnityEngine.Random.Range(0, 100);
+        int rotation = UnityEngine.Random.Range(0, 4);
         List<Vector3> shipNodes = new List<Vector3>();
 
         switch(rotation)
@@ -242,35 +249,58 @@ public class AI : MonoBehaviour {
         stopCheck = false;
     }
 
+    private int getCoord (int row, int col) {
+      return row * 10 + col;
+    }
+
+
     private void fireAtPlayer()
     {
+        if (currentPlayerShipIndex == -1)
+          chooseRandomIndex();
+
+        if (currentPlayerShipIndex >= playerShips.Count) {
+          Debug.Log("NO SPOTS FOR AI TO CHOOSE. RETURNING.");
+          return;
+        }
+
+        int coord = -1;
+
+        for (int i = 0; i < playerShips[currentPlayerShipIndex].LifeSpots.Count; ++i) {
+          // if spot not dead
+          if (playerShips[currentPlayerShipIndex].LifeSpots[i].x == 0) {
+            coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
+          }
+        }
+
+        if (coord == -1 && playerShips.Count > 0) {
+          removeCurrentShip();
+          fireAtPlayer();
+          return;
+        }
+
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;
         Debug.Log ("******************** FIRE AT TRISTAN. **************************");
-        while (true)
-        {
-            int coord = rng.Next(100);
-            bool hit = playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
-            bool miss = !playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
-            Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
 
-            if (hit)
-            {
-                playerNodes[coord].GetComponent<Node>().state = true;
-                playerNodes[coord].GetComponent<Node>().occupied = true;
-                //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
-                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
-                Debug.Log("AI LANDED A HIT!");
-                break;
-            }
-            else if(miss)
-            {
-                //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
-                playerNodes[coord].GetComponent<Node>().state = true;
-                // playerNodes[coord].GetComponent<Node>().occupied = true;
-                playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
-                Debug.Log("AI MISSED!");
-                break;
-            }
+        bool hit = playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
+        bool miss = !playerNodes[coord].GetComponent<Node>().occupied && !playerNodes[coord].GetComponent<Node>().miss;
+        Debug.Log("Generated shot coords at " + coord + "hit status: " + hit + "miss status: " + miss);
+
+        if (hit)
+        {
+            playerNodes[coord].GetComponent<Node>().state = true;
+            playerNodes[coord].GetComponent<Node>().occupied = true;
+            //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
+            playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+            Debug.Log("AI LANDED A HIT!");
+        }
+        else if(miss)
+        {
+            //playerNodes[coord].GetComponent<Node>().setNodeToMissState();
+            playerNodes[coord].GetComponent<Node>().state = true;
+            // playerNodes[coord].GetComponent<Node>().occupied = true;
+            playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+            Debug.Log("AI MISSED!");
         }
 
     }

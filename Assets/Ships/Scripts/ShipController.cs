@@ -62,6 +62,8 @@ public class ShipController : MonoBehaviour {
 			LifeSpots[i].Row = (int)pieceList[i].y;
 			LifeSpots[i].Col = (int)pieceList[i].z;
 		}
+
+		GameObject.Find("AI").GetComponent<AI>().addPlayerShip(pieceList, originalName);
 		Debug.Log("SetShip was called for: " + originalName + " on " + SeaboardName);
 	}
 
