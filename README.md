@@ -1,10 +1,18 @@
 ```
-██████╗ ███████╗██████╗ ███████╗██╗     ██╗ ██████╗████████╗
-██╔══██╗██╔════╝██╔══██╗██╔════╝██║     ██║██╔════╝╚══██╔══╝
-██║  ██║█████╗  ██████╔╝█████╗  ██║     ██║██║        ██║   
-██║  ██║██╔══╝  ██╔══██╗██╔══╝  ██║     ██║██║        ██║   
-██████╔╝███████╗██║  ██║███████╗███████╗██║╚██████╗   ██║   
-╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝ ╚═════╝   ╚═╝   
+
+ ▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░▌           ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ 
+▐░▌       ▐░▌▐░▌          ▐░▌       ▐░▌▐░▌          ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░▌          ▐░▌     ▐░▌  ▐░▌          ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌     
+▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌     
+ ▀▀▀▀▀▀▀▀▀▀   ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀       ▀      
+                                                                                                        
+ 
 ```                                                            
 
 
@@ -111,7 +119,7 @@ As of current, there are no precompiled versions of Derelict. In order to run De
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. Note: All non-simplistic 3d models and sound effects are not our property and we do not claim any ownership of them. Per request of the author, any of these assets of which were made freely available online can be removed if it is so desired.
 
 ## Acknowledgments
 
@@ -122,4 +130,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 * [Bertrum](https://www.turbosquid.com/Search/Artists/Bertrum) for Landing Craft 3d model
 * [gofree33](https://www.turbosquid.com/Search/Artists/gofree33) for Nautilus Submarine 3d model
 * [jhthomas512](https://www.turbosquid.com/Search/Artists/jhthomas512) for the American Warship 3d model
-
+* [Ben Throop](https://assetstore.unity.com/publishers/3526) for the Unity Detonator Explosions asset.
+* [Chris Hartman](https://www.cs.uaf.edu/~hartman/) for teaching us (the developers) best code practices and the Agile design methodology.
+* [Glenn Chappell](https://www.cs.uaf.edu/~chappell/) for making Figlet, which was used to generate the ASCII text at the top of the readme.
