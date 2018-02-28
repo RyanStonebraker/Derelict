@@ -273,6 +273,7 @@ public class AI : MonoBehaviour {
             // if spot not dead
             if (playerShips[currentPlayerShipIndex].LifeSpots[i].x == 0) {
               coord = getCoord((int)playerShips[currentPlayerShipIndex].LifeSpots[i].y, (int)playerShips[currentPlayerShipIndex].LifeSpots[i].z);
+              playerShips[currentPlayerShipIndex].LifeSpots[i] = new Vector3(1, playerShips[currentPlayerShipIndex].LifeSpots[i].y, playerShips[currentPlayerShipIndex].LifeSpots[i].z);
             }
           }
         } else {
@@ -319,9 +320,10 @@ public class AI : MonoBehaviour {
             Debug.Log("AI Hit Coord: " + coord);
           }
           else {
+            playerNodes[coord].GetComponent<Node>().state = false;
             playerNodes[coord].GetComponent<Node>().miss = true;
             playerNodes[coord].GetComponent<Node>().hit = false;
-            Debug.Log("AI missed Coord: " + coord);  
+            Debug.Log("AI missed Coord: " + coord);
           }
             //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
             playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
