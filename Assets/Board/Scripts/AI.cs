@@ -276,7 +276,6 @@ public class AI : MonoBehaviour {
               playerShips[currentPlayerShipIndex].LifeSpots[i] = new Vector3(1, playerShips[currentPlayerShipIndex].LifeSpots[i].y, playerShips[currentPlayerShipIndex].LifeSpots[i].z);
             }
             if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
-              removeCurrentShip();
               atLastIndexOfShip = true;
               Debug.Log("AI Removing local copy of: " + playerShips[currentPlayerShipIndex].ShipName);
             }
@@ -337,8 +336,10 @@ public class AI : MonoBehaviour {
             //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
             playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
 
-            if (atLastIndexOfShip)
+            if (atLastIndexOfShip) {
+              removeCurrentShip();
               chooseRandomIndex();
+            }
         // }
         // else if(miss)
         // {
