@@ -10,9 +10,46 @@ public class AI : MonoBehaviour {
     public GameObject AIBoard = null;
     public GameObject currentShot = null;
 
+    [System.Serializable]
+    public struct ShipContainer {public Vector3 [] LifeSpots; public string ShipName;}
+
+    public List<ShipContainer> playerShips;
+    public int currentPlayerShipIndex = -1;
+    public double AIHitPercentange = 0.8;
+    private int existingShipLocation = -1;
+
     public bool stopCheck = false;
 
     System.Random rng = new System.Random();
+
+    private bool ShipAlreadyExists(string shipName) {
+      for (int i = 0; i < playerShips.Count; ++i) {
+        if (playerShips[i].ShipName == shipName) {
+          existingShipLocation = i;
+          return true;
+        }
+      }
+      existingShipLocation = -1;
+      return false;
+    }
+
+
+    private int getExistingShipLocation () {
+      return existingShipLocation;
+    }
+
+
+    public void addPlayerShip(Vector3 [] shipLifeSpots, string shipName) {
+      if (ShipAlreadyExists(shipName)) {
+        LifeSpots[getExistingShipLocation()].LifeSpots = shipLifeSpots;
+        LifeSpots[getExistingShipLocation()].ShipName = shipName;
+        return;
+      }
+      ShipContainer tempShip;
+      tempShip.LifeSpots = shipLifeSpots;
+      tempShip.ShipName = shipName;
+      playerShips.Add(tempShip);
+    }
 
     public void Wait(float seconds, Action action)
     {
