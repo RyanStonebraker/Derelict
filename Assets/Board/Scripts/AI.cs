@@ -105,7 +105,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition - shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -127,7 +127,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -149,7 +149,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition - 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -171,7 +171,7 @@ public class AI : MonoBehaviour {
                         AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().occupied = true;
                         GameObject currentNode = AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos];
                         shipNodes.Add(new Vector3(0f, currentNode.tag[3] - 'A', currentNode.name[6] - '0'));
-                        AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
+                        //AIBoard.GetComponent<Board>().nodes[initPosition + 10 * shipPos].GetComponent<Node>().setNodeToHitState(); //REMOVE
                     }
                     if (shipName != "")
                     {
@@ -278,13 +278,16 @@ public class AI : MonoBehaviour {
             if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
               removeCurrentShip();
               atLastIndexOfShip = true;
+              Debug.Log("AI Removing local copy of: " + playerShips[currentPlayerShipIndex].ShipName);
             }
           }
         } else {
-          int tempRow = UnityEngine.Random.Range(0, 9);
-          int tempCol = UnityEngine.Random.Range(0, 9);
+          int tempRow = UnityEngine.Random.Range(0, 10);
+          int tempCol = UnityEngine.Random.Range(0, 10);
           bool foundEmpty = false;
-          while (!foundEmpty) {
+          for (int i = 0; i < 100; ++i) {
+            if (foundEmpty)
+              break;
             for (int i = 0; i < playerShips.Count; ++i) {
               bool notEmpty = false;
               for (int place = 0; place < playerShips[i].LifeSpots.Count; ++place) {
@@ -301,6 +304,14 @@ public class AI : MonoBehaviour {
             tempRow = UnityEngine.Random.Range(0, 9);
             tempCol = UnityEngine.Random.Range(0, 9);
           }
+
+          coord = getCoord(tempRow, tempCol);
+          Debug.Log("Found Empty Spot At: " + coord);
+        }
+
+        if (coord == -1 || coord >= 100) {
+          Debug.Log("You should not have gotten here... Leaving..");
+          return;
         }
 
         List <GameObject> playerNodes = PlayerBoard.GetComponent<Board>().nodes;
