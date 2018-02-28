@@ -267,7 +267,7 @@ public class AI : MonoBehaviour {
         int coord = -1;
 
         bool shouldHitAShip = (UnityEngine.Random.Range(0,100) <= 100 * AIHitPercentange) ? true : false;
-
+        bool atLastIndexOfShip = false;
         if (shouldHitAShip) {
           for (int i = 0; i < playerShips[currentPlayerShipIndex].LifeSpots.Count; ++i) {
             // if spot not dead
@@ -277,7 +277,7 @@ public class AI : MonoBehaviour {
             }
             if (i == playerShips[currentPlayerShipIndex].LifeSpots.Count -1) {
               removeCurrentShip();
-              chooseRandomIndex();
+              atLastIndexOfShip = true;
             }
           }
         } else {
@@ -325,6 +325,9 @@ public class AI : MonoBehaviour {
           }
             //playerNodes[coord].GetComponent<Node>().setNodeToHitState();
             playerNodes[coord].GetComponent<Node>().collidingObject = SHOTPREFAB;
+
+            if (atLastIndexOfShip)
+              chooseRandomIndex();
         // }
         // else if(miss)
         // {
