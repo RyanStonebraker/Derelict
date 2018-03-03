@@ -1,10 +1,18 @@
 ```
-██████╗ ███████╗██████╗ ███████╗██╗     ██╗ ██████╗████████╗
-██╔══██╗██╔════╝██╔══██╗██╔════╝██║     ██║██╔════╝╚══██╔══╝
-██║  ██║█████╗  ██████╔╝█████╗  ██║     ██║██║        ██║   
-██║  ██║██╔══╝  ██╔══██╗██╔══╝  ██║     ██║██║        ██║   
-██████╔╝███████╗██║  ██║███████╗███████╗██║╚██████╗   ██║   
-╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝ ╚═════╝   ╚═╝   
+
+ ▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░▌           ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀  ▀▀▀▀█░█▀▀▀▀ 
+▐░▌       ▐░▌▐░▌          ▐░▌       ▐░▌▐░▌          ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀█░█▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░▌       ▐░▌▐░▌          ▐░▌     ▐░▌  ▐░▌          ▐░▌               ▐░▌     ▐░▌               ▐░▌     
+▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄  ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄      ▐░▌     
+▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░▌     
+ ▀▀▀▀▀▀▀▀▀▀   ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀       ▀      
+                                                                                                        
+ 
 ```                                                            
 
 
@@ -14,13 +22,13 @@ A virtual reality battleship game.
 
 ## Getting Started
 
-Derelict is an MIT licensed Battleship game developed for virtual reality using Unity and SteamVR. It has been tested to work on both the Oculus Rift and HTC Vive. Currently, playing is restricted to the developer release only and the below developer instructions must be followed to test out the current build. When more gameplay has been added in the future, release candidate builds will be created for easier use.
+Derelict is an MIT licensed Battleship game developed for virtual reality using Unity and SteamVR. It has been tested to work on both the Oculus Rift and HTC Vive. Full gameplay has been tested to work, but no releases have been added to the git repository. If any bugs are found, please make an issue.
 
 ## Prerequisites
 
 ### Developers
 * Unity
-* Unity supported IDE (VS 2017 works)
+* Unity supported IDE (VS 2017 works, but GitHub Atom is superior)
 * Oculus Rift or HTC Vive (Cross Compatible)
 * Computer capable of handling VR and graphics rendering
 * SteamVR (and Oculus software if applicable) 
@@ -87,7 +95,7 @@ Unlike traditional languages and projects that support test driven development, 
 
 ## Deployment
 
-As of current, there are no precompiled versions of Derelict. In order to run Derelict on your virtual reality system, you must have Unity set up and configured to the repository as a working directory. Once this is done, you can simply press play to enter the current developer edition release. In the future, releases will be shipped in a separate folder in the repository for mainstream game play.
+As of current, there are no precompiled versions of Derelict in the repository. In order to run Derelict on your virtual reality system, you must have Unity set up and configured to the repository as a working directory. Once this is done, you can go to File->Build & Run to make a Developer release. In the future, releases will be shipped in a separate folder in the repository for mainstream game play.
 
 ## Built With
 
@@ -111,7 +119,7 @@ As of current, there are no precompiled versions of Derelict. In order to run De
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details. Note: All non-simplistic 3d models and sound effects are not our property and we do not claim any ownership of them. Per request of the author, any of these assets of which were made freely available online can be removed if it is so desired.
 
 ## Acknowledgments
 
@@ -122,4 +130,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 * [Bertrum](https://www.turbosquid.com/Search/Artists/Bertrum) for Landing Craft 3d model
 * [gofree33](https://www.turbosquid.com/Search/Artists/gofree33) for Nautilus Submarine 3d model
 * [jhthomas512](https://www.turbosquid.com/Search/Artists/jhthomas512) for the American Warship 3d model
-
+* [Ben Throop](https://assetstore.unity.com/publishers/3526) for the Unity Detonator Explosions asset.
+* [Chris Hartman](https://www.cs.uaf.edu/~hartman/) for teaching us (the developers) best code practices and the Agile design methodology.
+* [Glenn Chappell](https://www.cs.uaf.edu/~chappell/) for making Figlet, which was used to generate the ASCII text at the top of the readme.
