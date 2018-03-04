@@ -16,7 +16,7 @@
 ```                                                            
 
 
-A virtual reality battleship game.
+A virtual reality battleship game. [Download v1.0.0 Here](https://github.com/RyanStonebraker/Derelict/raw/master/Releases/v1.0.0.zip)
 
 [![Derelict VR](https://img.youtube.com/vi/pcQfRWxC5eY/0.jpg)](https://youtu.be/pcQfRWxC5eY)
 
@@ -58,7 +58,7 @@ Derelict is an MIT licensed Battleship game developed for virtual reality using 
 ### Users
 1. Install SteamVR
 2. Run the setup software for the HTC Vive or Oculus Rift
-3. Download Derelict (release build coming soon)
+3. Download Derelict [v1.0.0](https://github.com/RyanStonebraker/Derelict/raw/master/Releases/v1.0.0.zip)
 4. Launch Derelict and select graphics settings
 5. Hit play and enjoy!
 
