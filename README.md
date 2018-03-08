@@ -18,7 +18,7 @@
 
 A virtual reality battleship game. [Download v1.0.0 Here](https://github.com/RyanStonebraker/Derelict/raw/master/Releases/v1.0.0.zip)
 
-[![Derelict VR](https://img.youtube.com/vi/pcQfRWxC5eY/0.jpg)](https://youtu.be/pcQfRWxC5eY)
+[![Derelict VR](https://img.youtube.com/vi/wbaUJPeeVB8/0.jpg)](https://youtu.be/wbaUJPeeVB8)
 
 ## Getting Started
 
